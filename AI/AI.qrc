@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/AI">
+        <file>images/ScreenLock/128.jpg</file>
+    </qresource>
+</RCC>

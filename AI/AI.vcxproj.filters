@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Header Files\Shortcut">
+      <UniqueIdentifier>{43bb7223-b119-4c91-bf60-950d40881b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shortcut">
+      <UniqueIdentifier>{417923d4-d6cc-42ca-8223-01a2b0cd2de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Browser">
+      <UniqueIdentifier>{297448ac-a35a-4e57-ab94-3bfab44c2893}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Browser">
+      <UniqueIdentifier>{21c17683-c4fb-4e31-a344-54ffedb460ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TrayMenu">
+      <UniqueIdentifier>{12bfa7a7-a6ed-4ae8-91ef-722315bb358d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TrayMenu">
+      <UniqueIdentifier>{7806d751-3bd5-4ff2-ac5b-2cafd7a0c86d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{76ea0b27-8f6a-499f-8612-371d36d182d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{51ab9e99-a627-4e22-a991-f4e75171f557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Output">
+      <UniqueIdentifier>{0726d354-30fe-4e5d-bb90-aeba757f85a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Output">
+      <UniqueIdentifier>{bc1480cc-76b1-42d7-bfae-f78555dcc080}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Character">
+      <UniqueIdentifier>{0a3b2581-2e89-40ca-be87-c2ea8b75c2e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Character">
+      <UniqueIdentifier>{376d3c28-3e5f-4b87-bc33-95db1e95788d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen">
+      <UniqueIdentifier>{5aa17845-9440-447e-b589-085d5c415778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen\ScreenLock">
+      <UniqueIdentifier>{f3f20afc-8ce0-4e75-8b92-d91c12319857}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen\ScreenSaver">
+      <UniqueIdentifier>{04c1f42b-af9e-4f9f-a97c-f11e4922cd38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen">
+      <UniqueIdentifier>{80b8689e-6c2f-4d40-92f6-f784d99884a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenLock">
+      <UniqueIdentifier>{681b5043-4430-485d-9c45-2a3417864788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen\ScreenSaver">
+      <UniqueIdentifier>{6084ae90-d33c-4c47-b324-9fbc23daab27}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppShortcutMenu.cpp">
+      <Filter>Source Files\Shortcut</Filter>
+    </ClCompile>
+    <ClCompile Include="Output.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BrowserMenu.cpp">
+      <Filter>Source Files\Browser</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrayMenu.cpp">
+      <Filter>Source Files\TrayMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="InputEdit.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputMenu.cpp">
+      <Filter>Source Files\Output</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputBox.cpp">
+      <Filter>Source Files\Output</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputTransform.cpp">
+      <Filter>Source Files\Output</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="MyQMenu.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="MyQLabel.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenSaver.cpp">
+      <Filter>Source Files\Screen\ScreenSaver</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenLock.cpp">
+      <Filter>Source Files\Screen\ScreenLock</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenSaverCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WinAPI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppList.cpp">
+      <Filter>Source Files\Shortcut</Filter>
+    </ClCompile>
+    <ClCompile Include="FaceDetection.cpp">
+      <Filter>Source Files\Screen\ScreenLock</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleApplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractOutputBox.cpp">
+      <Filter>Source Files\Output</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputBigBox.cpp">
+      <Filter>Source Files\Output</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="AppShortcutMenu.h">
+      <Filter>Header Files\Shortcut</Filter>
+    </QtMoc>
+    <QtMoc Include="Output.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="BrowserMenu.h">
+      <Filter>Header Files\Browser</Filter>
+    </QtMoc>
+    <QtMoc Include="DeleteFile.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ScreenLock.h">
+      <Filter>Header Files\Screen\ScreenLock</Filter>
+    </QtMoc>
+    <QtMoc Include="TrayMenu.h">
+      <Filter>Header Files\TrayMenu</Filter>
+    </QtMoc>
+    <QtMoc Include="Input.h">
+      <Filter>Header Files\Input</Filter>
+    </QtMoc>
+    <QtMoc Include="InputEdit.h">
+      <Filter>Header Files\Input</Filter>
+    </QtMoc>
+    <QtMoc Include="OutputMenu.h">
+      <Filter>Header Files\Output</Filter>
+    </QtMoc>
+    <QtMoc Include="OutputBox.h">
+      <Filter>Header Files\Output</Filter>
+    </QtMoc>
+    <QtMoc Include="OutputTransform.h">
+      <Filter>Header Files\Output</Filter>
+    </QtMoc>
+    <QtMoc Include="AI.h">
+      <Filter>Header Files\Character</Filter>
+    </QtMoc>
+    <QtMoc Include="MyQMenu.h">
+      <Filter>Header Files\Character</Filter>
+    </QtMoc>
+    <QtMoc Include="MyQLabel.h">
+      <Filter>Header Files\Character</Filter>
+    </QtMoc>
+    <QtMoc Include="ScreenSaver.h">
+      <Filter>Header Files\Screen\ScreenSaver</Filter>
+    </QtMoc>
+    <QtMoc Include="AppList.h">
+      <Filter>Header Files\Shortcut</Filter>
+    </QtMoc>
+    <QtMoc Include="SingleApplication.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="AI.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="ScreenLock.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="ScreenSaver.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AppList.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="AI.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HookDll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenSaverCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WinAPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractOutputBox.h">
+      <Filter>Header Files\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputBigBox.h">
+      <Filter>Header Files\Output</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
