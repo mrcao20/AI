@@ -30,9 +30,10 @@ signals :
 	void changeCharacterState(const QString &);
 	void lockScreen();
 	void unlockScreen(const QString &);
-	void exitApplication(const QString &);
+	void exitApp(const QString &);
 	void setHook();
 	void unsetHook(const QString &);
+	void openStrtoolsBox();
 
 private slots :
 	void handleInput(const QString &);

@@ -1,3 +1,3 @@
 #pragma once
 
-void setTopWindow(const char *windowName);
+void setTopWindow(const WCHAR *windowName);

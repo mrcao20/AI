@@ -10,7 +10,7 @@
 #include <qprocess.h>
 
 struct InputDataPrivate{
-	QTextEdit * m_textEdit;
+	QPlainTextEdit * m_textEdit;
 	QTimer *m_timer;
 	QStringList m_command;
 	QMap<QString, QStringList> m_cmd_map;
@@ -26,7 +26,7 @@ Input::Input(QWidget *parent)
 	d->m_textEdit = new InputEdit(this);
 	d->m_isCmd = false;
 
-	setStyleSheet("QMainWindow{background-color:black;border:none;}QTextEdit{background-color:black;color:rgb(0,255,0);border:none;}");
+	setStyleSheet("QMainWindow{background-color:black;border:none;}QPlainTextEdit{background-color:black;color:rgb(0,255,0);border:none;}");
 	setWindowOpacity(0.72);
 	//setAttribute(Qt::WA_TranslucentBackground, true); //±³¾°Í¸Ã÷
 	setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::SubWindow); //È¥³ý±ß¿ò //SubWindow
@@ -74,6 +74,7 @@ void Input::initCommand() {
 		d->m_command.append(fileInfo.baseName());
 	}
 	d->m_command.append("cmd");
+	d->m_command.append("strtools");
 	/*d->m_command.append("change");
 	d->m_command.append("show");
 	d->m_command.append("lock");
@@ -81,11 +82,12 @@ void Input::initCommand() {
 }
 
 bool Input::isExistCmd(const QString &cmd) {
-#ifdef _DEBUG
-	return QFile::exists(QString("../x64/Release/commands/%1").arg(cmd));
-#else
-	return QFile::exists(QString(qApp->applicationDirPath() + "/commands/%1").arg(cmd));
-#endif // _DEBUG
+//#ifdef _DEBUG
+//	return QFile::exists(QString("../x64/Release/commands/%1").arg(cmd));
+//#else
+//	return QFile::exists(QString(qApp->applicationDirPath() + "/commands/%1").arg(cmd));
+//#endif // _DEBUG
+	return d->m_command.contains(cmd);
 }
 
 QStringList Input::openCmdFile(const QString &fileName) {
@@ -186,7 +188,7 @@ void Input::completeCommand(const QString &command) {
 		finalCommand += tempStr;
 		finalCommand += " ";
 	}
-	d->m_textEdit->setText(finalCommand);
+	d->m_textEdit->setPlainText(finalCommand);
 	d->m_textEdit->moveCursor(QTextCursor::End);
 }
 
@@ -256,16 +258,16 @@ void Input::handleCommand(QString &command) {
 	QStringList commandList = command.split(QRegExp("\\s+"), QString::SkipEmptyParts);
 	QString cmd = commandList.takeFirst();
 	
-	if (commandList.isEmpty())
-		return;
-
 	if (!isExistCmd(cmd)) {
 		output << QString("without this command: %1").arg(cmd);
 		return;
 	}
 
+	if (commandList.isEmpty()) {
+		commandList.append(cmd + "Box");
+		cmd = "open";
+	}
 	addCmd(cmd);
-
 	runCmd(cmd, commandList);
 }
 

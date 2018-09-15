@@ -53,6 +53,10 @@ void ScreenLock::setDateTime() {
 	ui.DateLabel->setText(local.toString("MÔÂdÈÕ, dddd"));
 }
 
+void ScreenLock::keyPressEvent(QKeyEvent *event) {
+	userLogin();
+}
+
 bool ScreenLock::eventFilter(QObject *obj, QEvent *event) {
 	if (obj == ui.ScreenLockPictureLabel){
 		if (event->type() == QEvent::MouseButtonPress){

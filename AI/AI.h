@@ -27,7 +27,7 @@ signals:
 	void screenUnlocked();
 	void unlockScreen(const QString &);
 
-private slots:
+public slots:
 	void resetPosition();
 	void openInputEdit();
 	void lockScreen();

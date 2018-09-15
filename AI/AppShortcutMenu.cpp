@@ -6,10 +6,16 @@
 
 AppShortcutMenu::AppShortcutMenu(QMenu *parent)
 	: QMenu(parent)
-	, shortcutDir("./AppShortcut")
 	, appList(nullptr){
 
 	this->setTitle("App");
+
+	shortcutDir = qApp->applicationDirPath();
+#ifdef _DEBUG
+	shortcutDir += "/../Release/AppShortcut";
+#else
+	shortcutDir += "/AppShortcut";
+#endif // _DEBUG
 
 	QAction *refresh_action = this->addAction("refresh");
 	QAction *more_action = this->addAction("more...");

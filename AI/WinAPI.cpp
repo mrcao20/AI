@@ -1,8 +1,9 @@
 #include<Windows.h>
 
-void setTopWindow(const char *windowName) {
-	HWND hWnd = FindWindowA(NULL, windowName);
+void setTopWindow(const WCHAR *windowName) {
+	HWND hWnd = FindWindow(NULL, windowName);
 	SetForegroundWindow(hWnd);
 	SwitchToThisWindow(hWnd, TRUE);
 	SetFocus(hWnd);
+	::PostMessage(hWnd, WM_SETFOCUS, NULL, NULL);
 }

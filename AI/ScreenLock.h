@@ -5,6 +5,10 @@
 #include "ui_ScreenLock.h"
 #include <qtimer.h>
 
+QT_BEGIN_NAMESPACE
+class QKeyEvent;
+QT_END_NAMESPACE
+
 class ScreenLock : public QWidget
 {
 	Q_OBJECT
@@ -12,10 +16,9 @@ class ScreenLock : public QWidget
 public:
 	ScreenLock(QWidget *parent = Q_NULLPTR);
 
-	
-
 protected:
-	bool eventFilter(QObject *obj, QEvent *event);
+	bool eventFilter(QObject *obj, QEvent *event) override;
+	void keyPressEvent(QKeyEvent *event) override;
 
 signals:
 	void loginSuccessful();

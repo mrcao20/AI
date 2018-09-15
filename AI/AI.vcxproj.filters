@@ -82,6 +82,12 @@
     <Filter Include="Source Files\Screen\ScreenSaver">
       <UniqueIdentifier>{6084ae90-d33c-4c47-b324-9fbc23daab27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ToolsBox">
+      <UniqueIdentifier>{116505ef-7b9a-48a1-96f2-d076231f9e2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ToolsBox">
+      <UniqueIdentifier>{3f2eb327-7c9a-4fe4-82e7-edde30386b47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -153,6 +159,15 @@
     <ClCompile Include="OutputBigBox.cpp">
       <Filter>Source Files\Output</Filter>
     </ClCompile>
+    <ClCompile Include="StrToolsBox.cpp">
+      <Filter>Source Files\ToolsBox</Filter>
+    </ClCompile>
+    <ClCompile Include="InputTextEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyNativeEventFilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AppShortcutMenu.h">
@@ -206,6 +221,12 @@
     <QtMoc Include="SingleApplication.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="StrToolsBox.h">
+      <Filter>Header Files\ToolsBox</Filter>
+    </QtMoc>
+    <QtMoc Include="InputTextEdit.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="AI.ui">
@@ -241,6 +262,12 @@
     </ClInclude>
     <ClInclude Include="OutputBigBox.h">
       <Filter>Header Files\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="GBK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyNativeEventFilter.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

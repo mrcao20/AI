@@ -2,8 +2,7 @@
 #include <qdebug.h>
 
 InputEdit::InputEdit(QWidget *parent)
-	: QTextEdit(parent)
-	, parent(parent)
+	: InputTextEdit(parent)
 	, isPressCtrl(false) {
 
 	this->resize(300, 150);
@@ -38,7 +37,7 @@ void InputEdit::keyPressEvent(QKeyEvent *event) {
 		emit completeCommand(toPlainText());
 		return;
 	}
-	QTextEdit::keyPressEvent(event);
+	QPlainTextEdit::keyPressEvent(event);
 }
 
 void InputEdit::keyReleaseEvent(QKeyEvent * event) {
@@ -46,31 +45,5 @@ void InputEdit::keyReleaseEvent(QKeyEvent * event) {
 		isPressCtrl = false;
 		return;
 	}
-	QTextEdit::keyPressEvent(event);
-}
-
-void InputEdit::mouseDoubleClickEvent(QMouseEvent *event) {
-	if (event->button() == Qt::LeftButton) {
-		this->pressFlag = true;
-		this->position = event->globalPos() - parent->pos();
-		this->beginMousePos = event->globalPos();
-	}
-	QTextEdit::mouseDoubleClickEvent(event);
-}
-
-void InputEdit::mouseReleaseEvent(QMouseEvent *event) {
-	if (event->button() == Qt::LeftButton && pressFlag) {
-		QPoint pos = event->globalPos() - beginMousePos;
-		if (abs(pos.x()) <= 5 && abs(pos.y()) <= 5) {
-		}
-		this->pressFlag = false;
-	}
-	QTextEdit::mouseReleaseEvent(event);
-}
-
-void InputEdit::mouseMoveEvent(QMouseEvent *event) {
-	if (pressFlag && (event->buttons() && Qt::LeftButton)) {
-		parent->move(event->globalPos() - position);
-	}
-	QTextEdit::mouseMoveEvent(event);
+	QPlainTextEdit::keyPressEvent(event);
 }

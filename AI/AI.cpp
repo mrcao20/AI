@@ -17,6 +17,7 @@
 #include "WinAPI.h"
 #include "HookDll.h"
 #include "OutputBox.h"
+#include "StrToolsBox.h"
 
 struct AIPrivateData : public Ui::AIClass {
 	QLabel * label;
@@ -31,6 +32,7 @@ struct AIPrivateData : public Ui::AIClass {
 	QString passwd;
 	bool isPressCtrl;
 	bool isScreenLock;
+	QScopedPointer<StrToolsBox> m_strToolsBox;
 };
 
 AI::AI(QWidget *parent)
@@ -43,6 +45,7 @@ AI::AI(QWidget *parent)
 	d->menu = new MyQMenu(this);
 	d->input.reset(nullptr);
 	d->outputTransform = new OutputTransform(this);
+	d->isPressCtrl = false;
 
 	d->setupUi(this);
 	this->setWindowTitle("AI");
@@ -54,9 +57,12 @@ AI::AI(QWidget *parent)
 
 	connect(d->menu, SIGNAL(openInputEdit()), SLOT(openInputEdit()));
 	connect(qobject_cast<MyQLabel *>(d->label), &MyQLabel::showMenu, [this]() {d->menu->exec(QCursor::pos()); });
-
+	
 	show();
 	resetPosition();
+
+	/*d->m_strToolsBox.reset(new StrToolsBox());
+	d->m_strToolsBox->show();*/
 }
 
 void AI::init() {
@@ -79,14 +85,14 @@ void AI::setScreenSaverTimer() {
 			d->screenSaverTimer->start();
 			return;
 		}
-		UnsetHook();
-		d->screenSaverTimer.reset();
 		lockScreen();
 	});
 	d->screenSaverTimer->start();
 }
 
 void AI::lockScreen() {
+	UnsetHook();
+	d->screenSaverTimer.reset();
 	d->screenLock.reset(new ScreenLock());
 	d->isScreenLock = true;
 	SetHook(d->isScreenLock);
@@ -108,7 +114,7 @@ void AI::lockScreen() {
 		if (d->screenSaverCtrl.GetScreenSaverRunning())
 			return;
 		closeTimer(screenLockTimer);
-		setTopWindow(d->screenLock->windowTitle().toStdString().c_str());
+		setTopWindow(d->screenLock->windowTitle().toStdWString().c_str());
 		//getFocus();
 	});
 	screenLockTimer->start(10);
@@ -128,7 +134,7 @@ void AI::openInputEdit() {
 		connect(d->input.data(), SIGNAL(changeCharacterState(QString)), d->label, SLOT(changeCharacterState(QString)));
 		connect(d->input.data(), SIGNAL(lockScreen()), this, SLOT(lockScreen()));
 		connect(d->input.data(), SIGNAL(unlockScreen(QString)), this, SIGNAL(unlockScreen(QString)));
-		connect(d->input.data(), &Input::exitApplication, [this](const QString &password) {
+		connect(d->input.data(), &Input::exitApp, [this](const QString &password) {
 			if (password == d->passwd)
 				quit();
 		});
@@ -141,6 +147,12 @@ void AI::openInputEdit() {
 		});
 		connect(d->input.data(), &Input::entryCmdMode, d->outputTransform, &OutputTransform::changedToFixedOutptuBox);
 		connect(d->input.data(), &Input::entryNormalMode, d->outputTransform, &OutputTransform::changedToNormalOutputBox);
+		connect(d->input.data(), &Input::openStrtoolsBox, [this]() {
+			if (!d->m_strToolsBox) {
+				d->m_strToolsBox.reset(new StrToolsBox());
+			}
+			d->m_strToolsBox->show();
+		});
 	}
 	else 
 		d->input->displayInput();
@@ -172,7 +184,7 @@ void AI::getFocus() {
 		d->tray_menu->changeDisplay();
 	hide();
 	show();
-	setTopWindow(this->windowTitle().toStdString().c_str());
+	setTopWindow(this->windowTitle().toStdWString().c_str());
 	QPoint point = this->pos();
 	QRect rect = this->rect();
 	mousePress(point.x() + (rect.width() / 2), point.y() + (rect.height() / 2));
@@ -240,7 +252,6 @@ void AI::keyPressEvent(QKeyEvent *event) {
 void AI::keyReleaseEvent(QKeyEvent * event) {
 	if (event->key() == Qt::Key_Control) {
 		d->isPressCtrl = false;
-		return;
 	}
 	QWidget::keyPressEvent(event);
 }
