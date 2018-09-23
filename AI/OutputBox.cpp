@@ -65,7 +65,7 @@ QSize OutputBox::getStringSize(QString &str) {
 	}
 	width = width > maxWidth ? maxWidth : width;
 	height = height > maxHeight ? maxHeight : height;
-	return QSize(width, height);
+	return QSize(width + 15, height);	// 返回的字符串宽度在实际宽度上增加15px，避免出现滚动条强制将字符串换行
 }
 
 QSize OutputBox::getEditBoxSize(const QString &strMessage) {
@@ -104,7 +104,7 @@ void OutputBox::SetMesseage(const QString &strMessage, const QPoint *pPoint) {
 		int height = strSize.height() + size().height();
 		strSize.setHeight(height > maxHeight ? maxHeight : height);
 	}
-
+	
 	setFixedSize(strSize);
 	textEdit->setFixedSize(strSize);
 

@@ -10,18 +10,15 @@ class MyQMenu : public QMenu {
 public:
 	MyQMenu(QWidget * = 0);
 
+	QMenu *appShortcutMenu();
+
 signals:
 	void openInputEdit();
-
-private slots:
 
 private:
 	QAction *input;
 
-	//QMenu *browserMenu;
-	QMenu *appShortcutMenu;
+	QMenu *m_appShortcutMenu;
 	QMenu *outputMenu;
-
-private:
 
 };

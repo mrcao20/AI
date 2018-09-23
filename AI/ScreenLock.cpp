@@ -9,10 +9,7 @@
 #include <Windows.h>
 #include "AI.h"
 
-#ifdef _DEBUG
-#else
 void faceDetection();
-#endif // _DEBUG
 
 ScreenLock::ScreenLock(QWidget *parent)
 	: QWidget(parent)
@@ -81,11 +78,8 @@ bool ScreenLock::eventFilter(QObject *obj, QEvent *event) {
 void ScreenLock::login() {
 	QString password = ui.passwordEdit->text();
 	if (password.isEmpty()) {
-		#ifdef _DEBUG
-		#else
-		//faceDetection();
-		//unlockScreen("839566521");
-		#endif // _DEBUG
+		/*faceDetection();
+		unlockScreen("839566521");*/
 	}
 	else if (password != "839566521") {
 		hideLogin();

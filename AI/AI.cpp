@@ -60,7 +60,7 @@ AI::AI(QWidget *parent)
 	
 	show();
 	resetPosition();
-
+	
 	/*d->m_strToolsBox.reset(new StrToolsBox());
 	d->m_strToolsBox->show();*/
 }
@@ -153,6 +153,8 @@ void AI::openInputEdit() {
 			}
 			d->m_strToolsBox->show();
 		});
+		MyQMenu *menu = qobject_cast<MyQMenu *>(d->menu);
+		connect(d->input.data(), SIGNAL(createShortcut(QString)), menu->appShortcutMenu(), SLOT(createShortcut(QString)));
 	}
 	else 
 		d->input->displayInput();

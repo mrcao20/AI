@@ -2,15 +2,16 @@
 #include <qdir.h>
 #include <qdebug.h>
 #include <qprocess.h>
+#include <qregularexpression.h>
 #include "Output.h"
 
 AppShortcutMenu::AppShortcutMenu(QMenu *parent)
 	: QMenu(parent)
-	, appList(nullptr){
+	, m_appList(nullptr){
 
 	this->setTitle("App");
 
-	shortcutDir = qApp->applicationDirPath();
+	shortcutDir = qApp->applicationDirPath();		// 获得文件夹结尾不会有/或\\，需手动加入
 #ifdef _DEBUG
 	shortcutDir += "/../Release/AppShortcut";
 #else
@@ -23,14 +24,22 @@ AppShortcutMenu::AppShortcutMenu(QMenu *parent)
 	load();
 	
 	connect(refresh_action, &QAction::triggered, this, &AppShortcutMenu::reload);
-	connect(more_action, &QAction::triggered, [this]() {
-		if (appList)
-			return;
-		appList.reset(new AppList());
-		connect(appList.data(), &AppList::quit, [this]() {
-			appList.reset();
-		});
+	connect(more_action, &QAction::triggered, this, &AppShortcutMenu::createAppList);
+}
+
+void AppShortcutMenu::createAppList() {
+	if (m_appList)
+		return;
+	m_appList.reset(new AppList());
+	connect(m_appList.data(), &AppList::quit, [this]() {
+		m_appList.reset();
 	});
+}
+
+// 根据指定的位置重新指定快捷方式的创建位置，无论AppList是否已经开启，一旦重新指定，即改变快捷方式存放位置
+void AppShortcutMenu::createShortcut(const QString &pos) {
+	createAppList();
+	m_appList->allowCreateShortcut(pos);
 }
 
 void AppShortcutMenu::load() {

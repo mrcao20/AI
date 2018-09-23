@@ -12,6 +12,10 @@ class AppShortcutMenu : public QMenu{
 public:
 	AppShortcutMenu(QMenu *parent = Q_NULLPTR);
 
+public slots:
+	void createAppList();
+	void createShortcut(const QString &pos);
+
 private slots:
 	void reload();
 
@@ -23,5 +27,5 @@ private:
 	QString shortcutDir;
 	QStringList fileNames;
 	QMap<QString, QAction *> appAction_map;
-	QScopedPointer<AppList> appList;
+	QScopedPointer<AppList> m_appList;
 };

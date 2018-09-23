@@ -34,6 +34,7 @@ signals :
 	void setHook();
 	void unsetHook(const QString &);
 	void openStrtoolsBox();
+	void createShortcut(const QString &);
 
 private slots :
 	void handleInput(const QString &);
@@ -61,5 +62,7 @@ private:
 	void handleMessage(const QString &message);
 	void handleCommand(QString &);
 	void hideInputTextEdit();
+
+	void setText(const QString &text);
 
 };

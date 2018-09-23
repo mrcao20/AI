@@ -1,5 +1,3 @@
-#ifdef _DEBUG
-#else
 #include "Python.h"
 #include <iostream>
 
@@ -24,4 +22,3 @@ void faceDetection() {
 
 	Py_Finalize();
 }
-#endif // _DEBUG
