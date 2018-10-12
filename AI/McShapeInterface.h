@@ -30,4 +30,6 @@ public:
 	virtual void moveStart() = 0;	// 移动开始时调用，主要用于获得撤销操作的点
 	virtual void move(const QPoint &pointOffset) = 0;	// 图形移动，参数为移动偏移量
 
+	virtual void getBorder(int &top, int &bottom, int &left, int &right, const QSize &canvasSize) = 0;	// 得到一个边框值，以覆盖所有图形
+
 };

@@ -28,8 +28,12 @@ public:
 	inline void moveStart() override {}
 	inline void move(const QPoint &pointOffset) override {}
 
+	void getBorder(int &top, int &bottom, int &left, int &right, const QSize &canvasSize) override;
+
 protected:
 	bool isLineSegRelated(const QPoint &p1, const QPoint &p2, const QPoint &checkP);
+	void getBorderForPoint(int &top, int &bottom, int &left, int &right, const QPoint &point);
+	void checkBorder(int &top, int &bottom, int &left, int &right, const QSize &size);
 
 protected:
 	QPoint m_startPoint;

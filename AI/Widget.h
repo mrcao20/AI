@@ -22,7 +22,7 @@ public:
 	~Widget();
 
 	void init(const QStringList &imageFormats);
-	void loadImage(QList<QUrl> urls);
+	virtual void loadImage(QList<QUrl> urls);
 	virtual void reset() = 0;
 
 protected:

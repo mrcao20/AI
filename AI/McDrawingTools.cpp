@@ -16,6 +16,8 @@ McDrawingTools::McDrawingTools(QWidget *parent)
 {
 	d->setupUi(this);
 
+	setAcceptDrops(false);
+
 	QButtonGroup *buttonGroup = new QButtonGroup(d->groupBox);
 	buttonGroup->addButton(d->pb_drawRect, Mc::Rect);
 	buttonGroup->addButton(d->pb_drawPolygon, Mc::Polygon);
@@ -66,6 +68,13 @@ McDrawingTools::McDrawingTools(QWidget *parent)
 			return;
 		setWidgetPalette(d->pb_brushColor, QPalette::Button, color);
 		d->f_canvas->setBrushColor(color);
+	});
+
+	connect(d->f_canvas, &McCanvas::hasImage, [this](const QImage &image) {
+		if (m_images.isEmpty())
+			m_images.append(image);
+		else
+			m_images.replace(0, image);
 	});
 }
 

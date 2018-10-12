@@ -16,6 +16,7 @@ public:
 
 	void init();
 
+	void loadImage(QList<QUrl> urls) override {}
 	void reset() override;
 
 protected:

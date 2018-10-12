@@ -134,3 +134,9 @@ QPoint McPolygon::endPos() const {
 	else
 		return d->m_polygonPoints.top();
 }
+
+void McPolygon::getBorder(int &top, int &bottom, int &left, int &right, const QSize &canvasSize) {
+	for (const QPoint &p : d->m_polygonPoints)
+		getBorderForPoint(top, bottom, left, right, p);
+	checkBorder(top, bottom, left, right, canvasSize);
+}

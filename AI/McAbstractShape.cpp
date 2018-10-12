@@ -51,3 +51,25 @@ bool McAbstractShape::isLineSegRelated(const QPoint &p1, const QPoint &p2, const
 		return true;
 	return false;
 }
+
+void McAbstractShape::getBorder(int &top, int &bottom, int &left, int &right, const QSize &canvasSize) {
+	if (m_startPoint == QPoint(-1, -1) && m_endPoint == QPoint(-1, -1))
+		return;
+	getBorderForPoint(top, bottom, left, right, m_startPoint);
+	getBorderForPoint(top, bottom, left, right, m_endPoint);
+	checkBorder(top, bottom, left, right, canvasSize);
+}
+
+void McAbstractShape::getBorderForPoint(int &top, int &bottom, int &left, int &right, const QPoint &point) {
+	top = (top == -1 || top > point.y()) ? point.y() - 1 : top;
+	bottom = (bottom == -1 || bottom < point.y()) ? point.y() + 1 : bottom;
+	left = (left == -1 || left > point.x()) ? point.x() - 1 : left;
+	right = (right == -1 || right < point.x()) ? point.x() + 1 : right;
+}
+
+void McAbstractShape::checkBorder(int &top, int &bottom, int &left, int &right, const QSize &size) {
+	top = (top < 0) ? 0 : top;
+	bottom = (bottom > size.height()) ? size.height() : bottom;
+	left = (left < 0) ? 0 : left;
+	right = (right > size.width()) ? size.width() : right;
+}

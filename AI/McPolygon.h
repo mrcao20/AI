@@ -29,6 +29,8 @@ public:
 	QPoint startPos() const  override;
 	QPoint endPos() const  override;
 
+	void getBorder(int &top, int &bottom, int &left, int &right, const QSize &canvasSize) override;
+
 private:
 	QScopedPointer<McPolygonData> d;
 };

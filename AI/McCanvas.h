@@ -34,6 +34,9 @@ public:
 	void setLineColor(const QColor &color);
 	void setBrushColor(const QColor &color);
 
+signals:
+	void hasImage(const QImage &image);
+
 protected:
 	void paintEvent(QPaintEvent *) override;
 	void mouseMoveEvent(QMouseEvent *) override;

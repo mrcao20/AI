@@ -19,6 +19,7 @@ Widget::Widget(QWidget *parent)
 	setAcceptDrops(true);
 	d->m_isCtrlPress = false;
 	d->m_isAltPress = false;
+	m_currentIndex = 0;
 	setFocus();
 }
 

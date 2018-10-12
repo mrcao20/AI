@@ -187,7 +187,7 @@ void McCanvas::setBrushColor(const QColor &color) {
 	d->m_brushColor.setAlpha(a);
 }
 
-void McCanvas::paintEvent(QPaintEvent *){
+void McCanvas::paintEvent(QPaintEvent *event){
 	QPainter painter(this);
 	static QPixmap pix;		// 定义一个静态的QPixmap，用于存放当前多边形未绘制结束时，之前的图像信息
 	if (d->m_currShape) {
@@ -216,6 +216,13 @@ void McCanvas::paintEvent(QPaintEvent *){
 			QPainter pp(&d->m_pixmap);
 			paint(pp);
 			painter.drawPixmap(0, 0, d->m_pixmap);
+			int top = -1, bottom = -1, left = -1, right = -1;
+			for (McShapeInterface *shape : d->m_shapeStack)
+				shape->getBorder(top, bottom, left, right, size());
+			int w = right - left;
+			int h = bottom - top;
+			QPixmap pix = d->m_pixmap.copy(left, top, w, h);
+			hasImage(pix.toImage());
 		}
 	}
 	else {
@@ -328,7 +335,6 @@ void McCanvas::mouseReleaseEvent(QMouseEvent *event){
 			McShapeInterface *zero = d->m_shapeFactory.getShape(d->m_shapeType, this);
 			zero->setPos(QPoint(-1, -1), QPoint(-1, -1), false);
 			d->m_shapeStack.push(zero);
-
 		}//Pen 制造间隔点
 		update();
 	}

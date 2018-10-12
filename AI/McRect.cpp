@@ -128,3 +128,11 @@ void McRect::move(const QPoint &pointOffset) {
 	fourthPoint.setX(left);
 	fourthPoint.setY(bottom);
 }
+
+void McRect::getBorder(int &top, int &bottom, int &left, int &right, const QSize &canvasSize) {
+	if (d->m_points.isEmpty())
+		return;
+	m_startPoint = d->m_points.at(0);
+	m_endPoint = d->m_points.at(2);
+	McAbstractShape::getBorder(top, bottom, left, right, canvasSize);
+}

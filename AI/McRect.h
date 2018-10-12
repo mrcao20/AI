@@ -27,6 +27,8 @@ public:
 	void moveStart() override;
 	void move(const QPoint &pointOffset) override;
 
+	void getBorder(int &top, int &bottom, int &left, int &right, const QSize &canvasSize) override;
+
 private:
 	QScopedPointer<McRectData> d;
 };
