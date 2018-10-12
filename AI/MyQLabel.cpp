@@ -1,131 +1,157 @@
 #include "MyQLabel.h"
 #include "AI.h"
-#include <sstream>
-#include <io.h>
+#include <qevent.h>
+#include <qpushbutton.h>
+#include <qwidget.h>
+#include <qtimer.h>
+#include <qmessagebox.h>
+#include <qvector.h>
+#include <qdir.h>
+#include "Global.h"
 
-MyQLabel::MyQLabel(QWidget *parent) 
+struct MyQLabelData {
+	QWidget * m_parent;
+	bool m_pressFlag;
+	bool m_isLockScreen;
+	QPoint m_position;
+	QPoint m_beginMousePos;
+	QTimer *m_playTimer;
+
+	MyQLabel::CharacterState m_characterState;
+	QVector<QImage> m_images;
+	int m_index;
+	QString m_imageDir;
+};
+
+MyQLabel::MyQLabel(const QString &imageDir, const QString &state, QWidget *parent)
 	: QLabel(parent)
-	, playTimer(new QTimer(this))
-	, pressFlag(false)
-	, isLockScreen(false)
-	, parent(parent){
+	, d(new MyQLabelData)
+{
+	d->m_playTimer = new QTimer(this);
+	d->m_pressFlag = false;
+	d->m_isLockScreen = false;
+	d->m_parent = parent;
 
 	AI *mainWindow = qobject_cast<AI *>(parent);
 	connect(mainWindow, &AI::screenLocked, [this]() {
-		this->isLockScreen = true;
+		d->m_isLockScreen = true;
 	});
 	connect(mainWindow, &AI::screenUnlocked, [this]() {
-		this->isLockScreen = false;
+		d->m_isLockScreen = false;
 	});
 
-	imageDir = "default";
+	d->m_imageDir = imageDir;
 	readAllImage();
-	changeCharacterState("stand");
-	connect(playTimer, SIGNAL(timeout()), this, SLOT(changePicture()));
+	changeCharacterState(state);
+	connect(d->m_playTimer, SIGNAL(timeout()), this, SLOT(changePicture()));
+}
+
+void MyQLabel::reload(const QString &imageDir) {
+	d->m_imageDir = imageDir;
+	readAllImage();
+	changeCharacterState(d->m_characterState);
 }
 
 void MyQLabel::changePicture() {
-	if (index >= images.size())
+	if (d->m_index >= d->m_images.size())
 		resetIndex();
-	updateImage(index);
-	index++;
+	updateImage(d->m_index);
+	d->m_index++;
 }
 
 void MyQLabel::resetIndex() {
-	this->index = 0;
+	this->d->m_index = 0;
 }
 
 void MyQLabel::updateImage(int index) {
 	if (index < 0) return;
-	QImage image = images.at(index);
-	this->setPixmap(QPixmap::fromImage(image));
-	this->resize(image.size());
+	QImage image = d->m_images.at(index);
+	setPixmap(QPixmap::fromImage(image));
+	resize(image.size());
 }
 
 void MyQLabel::changeCharacterState(const QString &state) {
 	if (state == "stand")
-		characterState = MyQLabel::Stand;
+		d->m_characterState = MyQLabel::Stand;
 	else if (state == "dance")
-		characterState = MyQLabel::Dance;
-	switch (characterState)
+		d->m_characterState = MyQLabel::Dance;
+	changeCharacterState(d->m_characterState);
+}
+
+void MyQLabel::changeCharacterState(MyQLabel::CharacterState state) {
+	switch (state)
 	{
 	case MyQLabel::Stand:
-		playTimer->stop();
-		updateImage(images.size() - 1);
+		d->m_playTimer->stop();
+		updateImage(d->m_images.size() - 1);
 		break;
 	case MyQLabel::Dance:
 		resetIndex();
-		playTimer->start(80);
+		d->m_playTimer->start(80);
 		break;
 	default:
 		break;
 	}
 }
 
-int MyQLabel::getImageCount() {
-	stringstream ss;
-	ss << "images/" + imageDir + "/" << "*.png";
-	intptr_t handle;                                                //用于查找的句柄
-	struct _finddata_t fileinfo;                          //文件信息的结构体
-	handle = _findfirst(ss.str().c_str(), &fileinfo);         //第一次查找
-	if (-1 == handle)
-		return 0;
-	int count = 1;
-	while (!_findnext(handle, &fileinfo))               //循环查找其他符合的文件，知道找不到其他的为止
-	{
-		count++;
-	}
-	_findclose(handle);
-	return count;
-}
-
 void MyQLabel::readAllImage() {
-	int count = getImageCount();
-	if (count <= 0) {
+	QString appPath;
+#ifdef _DEBUG
+	appPath = qApp->applicationDirPath() + "/../Release";
+#else
+	appPath = qApp->applicationDirPath();
+#endif // _DEBUG
+	QDir dir(appPath + "/images/Mode/" + d->m_imageDir);
+	QStringList fileList = dir.entryList(QDir::Files | QDir::NoDotAndDotDot, QDir::LocaleAware);
+	sort(fileList, SortAlgorithm::QuickSort);
+	int count = fileList.size();
+	if (count <= 0) {		// 如果文件夹中没有图片，则直接退出程序
 		QMessageBox message(QMessageBox::Warning, "Information", "not found image!");
 		message.exec();
 		exit(1);
 	}
-	if (count == images.capacity()) images.clear();
-	else if (count > images.capacity()) {
-		images.clear();
-		images.reserve(count);
+	// 动态判断当前图片容器大小和需要加载图片的数量，动态调整容器大小
+	if (count == d->m_images.capacity()) d->m_images.clear();
+	else if (count > d->m_images.capacity()) {
+		d->m_images.clear();
+		d->m_images.reserve(count);
 	}
 	else {
-		vector<QImage>().swap(images);
-		images.reserve(count);
+		QVector<QImage>().swap(d->m_images);
+		d->m_images.reserve(count);
 	}
-	for (int i = 0; i < count; i++) {
-		stringstream ss;
-		ss << "images/" + imageDir + "/" << i << ".png";
-		images.push_back(QImage(ss.str().c_str()));
+	// fileList中存放的仅为图片名字，不包含路径
+	for (const QString &fileName : fileList) {
+		QString filePath = dir.absoluteFilePath(fileName);
+		QImage img(filePath, QFileInfo(filePath).suffix().toStdString().c_str());
+		d->m_images.append(img);
 	}
 }
 
 void MyQLabel::mousePressEvent(QMouseEvent *event) {
 	if (event->button() == Qt::LeftButton) {
-		this->pressFlag = true;
-		this->position = event->globalPos() - parent->pos();
-		this->beginMousePos = event->globalPos();
+		d->m_pressFlag = true;
+		d->m_position = event->globalPos() - d->m_parent->pos();
+		d->m_beginMousePos = event->globalPos();
 	}
 }
 
 void MyQLabel::mouseReleaseEvent(QMouseEvent *event) {
 	if (event->button() == Qt::LeftButton) {
-		QPoint pos = event->globalPos() - beginMousePos;
+		QPoint pos = event->globalPos() - d->m_beginMousePos;
 		if (abs(pos.x()) <= 5 && abs(pos.y()) <= 5) {
 		}
-		this->pressFlag = false;
+		d->m_pressFlag = false;
 	}
 	else if (event->button() == Qt::RightButton) {
-		if (!isLockScreen)
+		if (!d->m_isLockScreen)
 			emit showMenu();
 	}
 }
 
 void MyQLabel::mouseMoveEvent(QMouseEvent *event) {
-	if (pressFlag && (event->buttons() && Qt::LeftButton)) {
-		QPoint point = event->globalPos() - position;
-		parent->move(point);
+	if (d->m_pressFlag && (event->buttons() && Qt::LeftButton)) {
+		QPoint point = event->globalPos() - d->m_position;
+		d->m_parent->move(point);
 	}
 }

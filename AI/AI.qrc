@@ -2,4 +2,14 @@
     <qresource prefix="/AI">
         <file>images/ScreenLock/128.jpg</file>
     </qresource>
+    <qresource prefix="/GraphProc">
+        <file>images/graphProc/drawTools/ellipse.png</file>
+        <file>images/graphProc/drawTools/line.png</file>
+        <file>images/graphProc/drawTools/pen.png</file>
+        <file>images/graphProc/drawTools/polygon.png</file>
+        <file>images/graphProc/drawTools/rect.png</file>
+        <file>images/graphProc/drawTools/redo.png</file>
+        <file>images/graphProc/drawTools/reset.png</file>
+        <file>images/graphProc/drawTools/undo.png</file>
+    </qresource>
 </RCC>

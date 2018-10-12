@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GraphicalProcessesClass</class>
+ <widget class="QWidget" name="GraphicalProcessesClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>768</width>
+    <height>533</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GraphicalProcesses</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0" colspan="3">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="styleSheet">
+      <string notr="true">QTabBar::tab{
+	width:80;
+	height:25;
+};</string>
+     </property>
+     <property name="currentIndex">
+      <number>2</number>
+     </property>
+     <widget class="BgTransparent" name="bgTransparent">
+      <property name="styleSheet">
+       <string notr="true">QWidget#bgTransparent{background-color:rgb(206, 206, 206)}</string>
+      </property>
+      <attribute name="title">
+       <string>背景透明</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="snippingTool">
+      <attribute name="title">
+       <string>截图工具</string>
+      </attribute>
+     </widget>
+     <widget class="McDrawingTools" name="drawingTool">
+      <attribute name="title">
+       <string>画图工具</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="2">
+    <widget class="QPushButton" name="pb_reset">
+     <property name="text">
+      <string>重置</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QPushButton" name="pb_file">
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>文件</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>BgTransparent</class>
+   <extends>QWidget</extends>
+   <header>bgtransparent.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>McDrawingTools</class>
+   <extends>QWidget</extends>
+   <header>mcdrawingtools.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="AI.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -95,6 +95,7 @@ void Input::initCommand() {
 	}
 	d->m_command.append("cmd");
 	d->m_command.append("strtools");
+	d->m_command.append("graphProc");
 	/*d->m_command.append("change");
 	d->m_command.append("show");
 	d->m_command.append("lock");

@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DrawingTools</class>
+ <widget class="QWidget" name="DrawingTools">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>731</width>
+    <height>484</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>DrawingTools</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="2" column="0">
+    <widget class="McCanvas" name="f_canvas">
+     <property name="focusPolicy">
+      <enum>Qt::StrongFocus</enum>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox#groupBox_2{
+	border:none;
+	background-color:rgb(188, 188, 188);
+}</string>
+     </property>
+     <property name="title">
+      <string>property</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="pb_undo">
+        <property name="toolTip">
+         <string>Undo</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#pb_undo{
+	background-color:color(0, 0, 0, 0);
+}
+QPushButton#pb_undo:hover{
+	background-color:color(255, 255, 255, 100);
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="AI.qrc">
+          <normaloff>:/GraphProc/images/graphProc/drawTools/undo.png</normaloff>:/GraphProc/images/graphProc/drawTools/undo.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>19</width>
+          <height>19</height>
+         </size>
+        </property>
+        <property name="shortcut">
+         <string>Ctrl+Z</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_redo">
+        <property name="toolTip">
+         <string>Redo</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#pb_redo{
+	background-color:color(0, 0, 0, 0);
+}
+QPushButton#pb_redo:hover{
+	background-color:color(255, 255, 255, 100);
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="AI.qrc">
+          <normaloff>:/GraphProc/images/graphProc/drawTools/redo.png</normaloff>:/GraphProc/images/graphProc/drawTools/redo.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>19</width>
+          <height>19</height>
+         </size>
+        </property>
+        <property name="shortcut">
+         <string>Ctrl+Y</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_reset">
+        <property name="toolTip">
+         <string>Reset</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#pb_reset{
+	background-color:color(0, 0, 0, 0);
+}
+QPushButton#pb_reset:hover{
+	background-color:color(255, 255, 255, 100);
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="AI.qrc">
+          <normaloff>:/GraphProc/images/graphProc/drawTools/reset.png</normaloff>:/GraphProc/images/graphProc/drawTools/reset.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>19</width>
+          <height>19</height>
+         </size>
+        </property>
+        <property name="shortcut">
+         <string>Ctrl+R</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDial" name="d_lineWidth">
+        <property name="minimumSize">
+         <size>
+          <width>51</width>
+          <height>51</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>51</width>
+          <height>51</height>
+         </size>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="l_lineWidth">
+        <property name="text">
+         <string>线宽:1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDial" name="d_alpha">
+        <property name="minimumSize">
+         <size>
+          <width>51</width>
+          <height>51</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>51</width>
+          <height>51</height>
+         </size>
+        </property>
+        <property name="maximum">
+         <number>255</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="l_alpha">
+        <property name="text">
+         <string>alpha值:0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>线条颜色</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb_lineColor">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>23</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border:1px solid white;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>填充颜色</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pb_brushColor">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>23</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border:1px solid white;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox#groupBox{
+	border:none;
+	background-color:rgb(85, 255, 0, 100);
+}</string>
+     </property>
+     <property name="title">
+      <string>shape</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="pb_drawRect">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Draw a Rect</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#pb_drawRect{
+	border:none;
+	background-color:rgb(85, 255, 0, 0);
+}
+QPushButton#pb_drawRect:hover{
+	background-color:rgb(85, 255, 0, 130);
+}
+QPushButton#pb_drawRect:checked{
+	background-color:rgb(85, 255, 0, 130);
+}</string>
+        </property>
+        <property name="icon">
+         <iconset resource="AI.qrc">
+          <normaloff>:/GraphProc/images/graphProc/drawTools/rect.png</normaloff>:/GraphProc/images/graphProc/drawTools/rect.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>33</width>
+          <height>27</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_drawPolygon">
+        <property name="toolTip">
+         <string>Draw A Polygon</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#pb_drawPolygon{
+	border:none;
+	background-color:rgb(85, 255, 0, 0);
+}
+QPushButton#pb_drawPolygon:hover{
+	background-color:rgb(85, 255, 0, 130);
+}
+QPushButton#pb_drawPolygon:checked{
+	background-color:rgb(85, 255, 0, 130);
+}</string>
+        </property>
+        <property name="icon">
+         <iconset resource="AI.qrc">
+          <normaloff>:/GraphProc/images/graphProc/drawTools/polygon.png</normaloff>:/GraphProc/images/graphProc/drawTools/polygon.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>33</width>
+          <height>27</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_drawEllipse">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Draw A Ellipse</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#pb_drawEllipse{
+	border:none;
+	background-color:rgb(85, 255, 0, 0);
+}
+QPushButton#pb_drawEllipse:hover{
+	background-color:rgb(85, 255, 0, 130);
+}
+QPushButton#pb_drawEllipse:checked{
+	background-color:rgb(85, 255, 0, 130);
+}</string>
+        </property>
+        <property name="icon">
+         <iconset resource="AI.qrc">
+          <normaloff>:/GraphProc/images/graphProc/drawTools/ellipse.png</normaloff>:/GraphProc/images/graphProc/drawTools/ellipse.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>33</width>
+          <height>27</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_drawLine">
+        <property name="toolTip">
+         <string>Draw A Line</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#pb_drawLine{
+	border:none;
+	background-color:rgb(85, 255, 0, 0);
+}
+QPushButton#pb_drawLine:hover{
+	background-color:rgb(85, 255, 0, 130);
+}
+QPushButton#pb_drawLine:checked{
+	background-color:rgb(85, 255, 0, 130);
+}</string>
+        </property>
+        <property name="icon">
+         <iconset resource="AI.qrc">
+          <normaloff>:/GraphProc/images/graphProc/drawTools/line.png</normaloff>:/GraphProc/images/graphProc/drawTools/line.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>33</width>
+          <height>27</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_drawWithPen">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Draw With Pen</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#pb_drawWithPen{
+	border:none;
+	background-color:rgb(85, 255, 0, 0);
+}
+QPushButton#pb_drawWithPen:hover{
+	background-color:rgb(85, 255, 0, 130);
+}
+QPushButton#pb_drawWithPen:checked{
+	background-color:rgb(85, 255, 0, 130);
+}</string>
+        </property>
+        <property name="icon">
+         <iconset resource="AI.qrc">
+          <normaloff>:/GraphProc/images/graphProc/drawTools/pen.png</normaloff>:/GraphProc/images/graphProc/drawTools/pen.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>33</width>
+          <height>27</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>McCanvas</class>
+   <extends>QFrame</extends>
+   <header>mccanvas.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="AI.qrc"/>
+ </resources>
+ <connections/>
+</ui>

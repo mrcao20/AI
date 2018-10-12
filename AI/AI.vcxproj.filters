@@ -88,6 +88,18 @@
     <Filter Include="Source Files\ToolsBox">
       <UniqueIdentifier>{3f2eb327-7c9a-4fe4-82e7-edde30386b47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Graphical">
+      <UniqueIdentifier>{208dab82-c551-4106-b510-a926826cdedf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphical">
+      <UniqueIdentifier>{74d6acbc-aed4-4513-b149-0ef87e5b757e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphical\DrawingTools">
+      <UniqueIdentifier>{24260fdc-1a9f-4e71-88c6-c45af2761041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphical\DrawingTools">
+      <UniqueIdentifier>{99ad3ced-9710-43c0-8248-ff38bce58986}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -168,6 +180,48 @@
     <ClCompile Include="MyNativeEventFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TcpServer.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicalProcesses.cpp">
+      <Filter>Source Files\Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="BgTransparent.cpp">
+      <Filter>Source Files\Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget.cpp">
+      <Filter>Source Files\Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="McShapeFactory.cpp">
+      <Filter>Source Files\Graphical\DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="McAbstractShape.cpp">
+      <Filter>Source Files\Graphical\DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="McCanvas.cpp">
+      <Filter>Source Files\Graphical\DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="McDrawingTools.cpp">
+      <Filter>Source Files\Graphical\DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="McPolygon.cpp">
+      <Filter>Source Files\Graphical\DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="McRect.cpp">
+      <Filter>Source Files\Graphical\DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="McEllipse.cpp">
+      <Filter>Source Files\Graphical\DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="McLine.cpp">
+      <Filter>Source Files\Graphical\DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="McPen.cpp">
+      <Filter>Source Files\Graphical\DrawingTools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AppShortcutMenu.h">
@@ -227,6 +281,42 @@
     <QtMoc Include="InputTextEdit.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="TcpServer.h">
+      <Filter>Header Files\Character</Filter>
+    </QtMoc>
+    <QtMoc Include="BgTransparent.h">
+      <Filter>Header Files\Graphical</Filter>
+    </QtMoc>
+    <QtMoc Include="GraphicalProcesses.h">
+      <Filter>Header Files\Graphical</Filter>
+    </QtMoc>
+    <QtMoc Include="Widget.h">
+      <Filter>Header Files\Graphical</Filter>
+    </QtMoc>
+    <QtMoc Include="McAbstractShape.h">
+      <Filter>Header Files\Graphical\DrawingTools</Filter>
+    </QtMoc>
+    <QtMoc Include="McCanvas.h">
+      <Filter>Header Files\Graphical\DrawingTools</Filter>
+    </QtMoc>
+    <QtMoc Include="McDrawingTools.h">
+      <Filter>Header Files\Graphical\DrawingTools</Filter>
+    </QtMoc>
+    <QtMoc Include="McPolygon.h">
+      <Filter>Header Files\Graphical\DrawingTools</Filter>
+    </QtMoc>
+    <QtMoc Include="McRect.h">
+      <Filter>Header Files\Graphical\DrawingTools</Filter>
+    </QtMoc>
+    <QtMoc Include="McEllipse.h">
+      <Filter>Header Files\Graphical\DrawingTools</Filter>
+    </QtMoc>
+    <QtMoc Include="McLine.h">
+      <Filter>Header Files\Graphical\DrawingTools</Filter>
+    </QtMoc>
+    <QtMoc Include="McPen.h">
+      <Filter>Header Files\Graphical\DrawingTools</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="AI.ui">
@@ -239,6 +329,15 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="AppList.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="BgTransparent.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="GraphicalProcesses.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="DrawingTools.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -267,6 +366,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MyNativeEventFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="McShapeFactory.h">
+      <Filter>Header Files\Graphical\DrawingTools</Filter>
+    </ClInclude>
+    <ClInclude Include="McShapeInterface.h">
+      <Filter>Header Files\Graphical\DrawingTools</Filter>
+    </ClInclude>
+    <ClInclude Include="McGlobal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -210,7 +210,7 @@ void AppList::createShortcut(const QString &filePath) {
 		QDir dir(filePath);
 		QStringList fileList = dir.entryList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot, QDir::LocaleAware);
 		for (const QString &file : fileList) {
-			createShortcut(file);
+			createShortcut(dir.absoluteFilePath(file));
 		}
 	}
 	QString tempDir = d->m_shortcutDir;

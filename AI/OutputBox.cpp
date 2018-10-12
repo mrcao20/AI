@@ -7,7 +7,7 @@
 #include <qpainter.h>
 #include <qapplication.h>
 #include <qdesktopwidget.h>
-#include <qregexp.h>
+#include <qregularexpression.h>
 #include <qtextedit.h>
 #include <qtimer.h>
 
@@ -70,7 +70,7 @@ QSize OutputBox::getStringSize(QString &str) {
 
 QSize OutputBox::getEditBoxSize(const QString &strMessage) {
 	QSize strSize(0, 0);
-	QStringList strList = strMessage.split(QRegExp("\\n"));
+	QStringList strList = strMessage.split(QRegularExpression("\\n"), QString::SkipEmptyParts);
 	bool isMaxWidth = false;
 	bool isMaxHeight = false;
 	for (auto str : strList) {

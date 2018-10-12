@@ -3,19 +3,18 @@
 
 #include <QtCore/QObject>
 
-#ifndef OUTPUT
-#define output *Output::instance()
-#endif // !OUTPUT
+#define output (*(Output::instance()))
 
 class Output : public QObject{
 	Q_OBJECT
 
 public:
-	static Output * instance();
-	inline Output &operator<< (const QString& msg) { this->message(msg); return *this; }
-	inline Output &operator<< (const char * msg) { this->message(QString(msg)); return *this; }
-	inline Output &operator<< (const QChar * msg) { this->message(QString(msg)); return *this; }
-	inline Output &operator<< (const QByteArray &msg) { this->message(msg); return *this; }
+	static Output *instance();
+	inline Output &operator<< (const QString& msg) { emit message(msg); return *this; }
+	inline Output &operator<< (const char * msg) { emit message(QString(msg)); return *this; }
+	inline Output &operator<< (const QChar * msg) { emit message(QString(msg)); return *this; }
+	inline Output &operator<< (const QByteArray &msg) { emit message(msg); return *this; }
+	inline Output &operator<< (const int &msg) { emit message(QString::number(msg)); return *this; }
 
 signals:
 	void message(const QString &msg);

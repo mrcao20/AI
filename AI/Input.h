@@ -35,6 +35,8 @@ signals :
 	void unsetHook(const QString &);
 	void openStrtoolsBox();
 	void createShortcut(const QString &);
+	void openGraphProcBox();
+	void changeCharacterImg(const QString &);
 
 private slots :
 	void handleInput(const QString &);

@@ -6,6 +6,7 @@
 #include <qtimer.h>
 #include <qevent.h>
 #include <qsystemtrayicon.h>
+#include <qsettings.h>
 #include "Input.h"
 #include "OutputTransform.h"
 #include "ScreenSaverCtrl.h"
@@ -18,9 +19,12 @@
 #include "HookDll.h"
 #include "OutputBox.h"
 #include "StrToolsBox.h"
+#include "TcpServer.h"
+#include "GraphicalProcesses.h"
 
 struct AIPrivateData : public Ui::AIClass {
-	QLabel * label;
+	QString m_appPath;
+	MyQLabel * label;
 	QMenu *menu;
 	QSystemTrayIcon *system_tray;
 	TrayMenu *tray_menu;
@@ -33,19 +37,38 @@ struct AIPrivateData : public Ui::AIClass {
 	bool isPressCtrl;
 	bool isScreenLock;
 	QScopedPointer<StrToolsBox> m_strToolsBox;
+	TcpServer *m_tcpServer;
+	QScopedPointer<QWidget> m_graphicalProcesses;
+	QString m_imageDir;
+	QString m_characterDefaultState;
 };
 
 AI::AI(QWidget *parent)
 	: QWidget(parent)
 	, d(new AIPrivateData) {
+
+#ifdef _DEBUG
+	d->m_appPath = qApp->applicationDirPath() + "/../Release";
+#else
+	d->m_appPath = qApp->applicationDirPath();
+#endif // _DEBUG
+
+	QSettings setting(d->m_appPath + "/Setting.ini", QSettings::IniFormat);
+	setting.beginGroup("AI");
+	d->m_imageDir = setting.value("imageDir", "default").toString();
+	d->m_characterDefaultState = setting.value("characterDefaultState", "stand").toString();
+	setting.endGroup();
 	
 	d->isScreenLock = false;
 	d->passwd = "839566521";
-	d->label = new MyQLabel(this);
+	d->label = new MyQLabel(d->m_imageDir, d->m_characterDefaultState, this);
 	d->menu = new MyQMenu(this);
 	d->input.reset(nullptr);
 	d->outputTransform = new OutputTransform(this);
 	d->isPressCtrl = false;
+	d->m_tcpServer = new TcpServer(this);
+
+	d->m_tcpServer->init();
 
 	d->setupUi(this);
 	this->setWindowTitle("AI");
@@ -61,8 +84,8 @@ AI::AI(QWidget *parent)
 	show();
 	resetPosition();
 	
-	/*d->m_strToolsBox.reset(new StrToolsBox());
-	d->m_strToolsBox->show();*/
+	openInputEdit();
+	d->input->openGraphProcBox();
 }
 
 void AI::init() {
@@ -155,6 +178,20 @@ void AI::openInputEdit() {
 		});
 		MyQMenu *menu = qobject_cast<MyQMenu *>(d->menu);
 		connect(d->input.data(), SIGNAL(createShortcut(QString)), menu->appShortcutMenu(), SLOT(createShortcut(QString)));
+		connect(d->input.data(), &Input::openGraphProcBox, [this]() {
+			GraphicalProcesses *g = new GraphicalProcesses();
+			g->init();
+			g->show();
+			connect(g, &GraphicalProcesses::quit, [this]() {
+				d->m_graphicalProcesses.reset();
+			});
+			d->m_graphicalProcesses.reset(g);
+			d->input->displayInput();
+		});
+		connect(d->input.data(), &Input::changeCharacterImg, [this](const QString &imgDir) {
+			d->m_imageDir = imgDir;
+			d->label->reload(imgDir);
+		});
 	}
 	else 
 		d->input->displayInput();
@@ -266,15 +303,21 @@ void AI::closeTimer(QTimer *timer) {
 	}
 }
 
-inline void AI::quit() {
+// 任何程序退出操作均调用该函数，执行正常退出，发生析构
+void AI::quit() {
 	QApplication::exit(0);
 }
 
+// 当程序析构时，保存相关信息，并释放资源
 AI::~AI() {
+	QSettings setting(d->m_appPath + "/Setting.ini", QSettings::IniFormat);
+	setting.beginGroup("AI");
+	setting.setValue("imageDir", d->m_imageDir);
+	setting.setValue("characterDefaultState", d->m_characterDefaultState);
+	setting.endGroup();
+
 	UnsetHook();
 	delete d->label;
 	delete d->system_tray;
 	delete d->tray_menu;
-	delete Output::instance();
-	deleteLater();
 }

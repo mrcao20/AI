@@ -13,10 +13,15 @@ bool MyNativeEventFilter::nativeEventFilter(const QByteArray &eventType, void *m
 		if (pMsg->message == WM_POWERBROADCAST) {
 			if (pMsg->wParam == PBT_APMSUSPEND) {
 				if (m_w) {
+					m_w->show();
 					m_w->lockScreen();
 					return true;
 				}
 			}
+		}
+		else if (pMsg->message == WM_QUERYENDSESSION) {
+			if (m_w)
+				m_w->quit();
 		}
 	}
 	return false;	// 如果需要对该消息做进一步处理，则返回true，否则返回false

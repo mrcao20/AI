@@ -2,24 +2,22 @@
 #pragma execution_character_set("utf-8")
 
 #include <qlabel.h>
-#include <qevent.h>
-#include <qmessagebox.h>
-#include <iostream>
-#include <qdebug.h>
-#include <qpushbutton.h>
-#include <qwidget.h>
-#include <qtimer.h>
+#include <qscopedpointer.h>
+#include "Global.h"
 
-using namespace std;
+struct MyQLabelData;
 
 class MyQLabel : public QLabel {
 	Q_OBJECT
 
 public:
-	MyQLabel(QWidget * = 0);
+	MyQLabel(const QString &imageDir, const QString &state, QWidget * = 0);
 
 public:
 	enum CharacterState { Stand, Dance };
+
+public slots:
+	void reload(const QString &imageDir);
 
 protected:
 	void mousePressEvent(QMouseEvent *);
@@ -32,24 +30,14 @@ signals:
 private slots :
 	void changePicture();  //超时处理函数  
 	void changeCharacterState(const QString &state);
+	void changeCharacterState(MyQLabel::CharacterState state);
 
 private:
-	QWidget * parent;
-	bool pressFlag;
-	bool isLockScreen;
-	QPoint position;
-	QPoint beginMousePos;
-	QTimer *playTimer;
-
-	CharacterState characterState;
-	vector<QImage> images;
-	int index;
-	string imageDir;
-
-private:
-	int getImageCount();
 	void readAllImage();
 	void resetIndex();
 	void updateImage(int index);
+
+private:
+	QScopedPointer<MyQLabelData> d;
 
 };
