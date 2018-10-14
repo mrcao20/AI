@@ -10,6 +10,8 @@ public:
 	explicit McAbstractShape(QObject *parent = 0);
 	virtual ~McAbstractShape() = default;
 
+	inline void setAntialiasing(bool isAntialiasing) { m_isAntialiasing = isAntialiasing; }
+
 	void setStartPos(const QPoint &point) override { m_startPoint = point; }
 	void setEndPos(const QPoint &point) override { m_endPoint = point; }
 	void setPos(const QPoint &startPoint, const QPoint &endPoint, bool isStraight) override;
@@ -42,6 +44,7 @@ protected:
 	QColor m_brushColor;
 	int m_lineWidth;
 	int m_relationOffset;
+	bool m_isAntialiasing;	// 该图形是否使用抗锯齿绘图，在图形创建时指定，图形一旦绘制则无法改变
 	
 };
 

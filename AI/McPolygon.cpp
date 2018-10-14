@@ -22,6 +22,8 @@ McPolygon::~McPolygon(){
 void McPolygon::paint(QPainter &paint) {
 	paint.setPen(QPen(m_lineColor, m_lineWidth));
 	paint.setBrush(m_brushColor);
+	if(m_isAntialiasing)	// 默认为不使用抗锯齿，如果需要指定再指定即可
+		paint.setRenderHint(QPainter::Antialiasing);
 	QPolygon polygon(d->m_polygonPoints.size());
 	for (int i = 0; i < d->m_polygonPoints.size(); ++i){
 		polygon.setPoint(i, d->m_polygonPoints.at(i));

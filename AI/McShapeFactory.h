@@ -6,6 +6,6 @@
 class McShapeFactory{
 
 public:
-	McShapeInterface *getShape(int shapeType, QObject *parent = 0);
+	McShapeInterface *getShape(int shapeType, bool isAntialiasing, QObject *parent = 0);
 };
 

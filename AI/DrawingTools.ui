@@ -290,6 +290,16 @@ QPushButton#pb_reset:hover{
         </property>
        </spacer>
       </item>
+      <item>
+       <widget class="QCheckBox" name="cb_antialiasing">
+        <property name="text">
+         <string>抗锯齿</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

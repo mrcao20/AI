@@ -50,6 +50,8 @@ McDrawingTools::McDrawingTools(QWidget *parent)
 			d->f_canvas->setAlpha(i);
 	});
 
+	connect(d->cb_antialiasing, &QCheckBox::clicked, d->f_canvas, &McCanvas::setAntialiasing);
+
 	connect(buttonGroup, qOverload<int>(&QButtonGroup::buttonClicked), [this](int id) {
 		if (d->f_canvas)
 			d->f_canvas->setShapeType(id);
@@ -83,6 +85,7 @@ void McDrawingTools::init() {
 	d->pb_drawRect->click();
 	d->f_canvas->setLineWidth(1);
 	d->f_canvas->setAlpha(0);
+	d->f_canvas->setAntialiasing(d->cb_antialiasing->isChecked());
 	d->pb_lineColor->setAutoFillBackground(true);
 	d->pb_brushColor->setAutoFillBackground(true);
 

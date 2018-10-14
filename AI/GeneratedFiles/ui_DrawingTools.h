@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDial>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
@@ -48,6 +49,7 @@ public:
     QLabel *label_2;
     QPushButton *pb_brushColor;
     QSpacerItem *horizontalSpacer;
+    QCheckBox *cb_antialiasing;
     QGroupBox *groupBox;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pb_drawRect;
@@ -200,6 +202,12 @@ public:
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
+
+        cb_antialiasing = new QCheckBox(groupBox_2);
+        cb_antialiasing->setObjectName(QStringLiteral("cb_antialiasing"));
+        cb_antialiasing->setChecked(true);
+
+        horizontalLayout->addWidget(cb_antialiasing);
 
 
         gridLayout->addWidget(groupBox_2, 0, 0, 1, 1);
@@ -367,6 +375,7 @@ public:
         pb_lineColor->setText(QString());
         label_2->setText(QApplication::translate("DrawingTools", "\345\241\253\345\205\205\351\242\234\350\211\262", nullptr));
         pb_brushColor->setText(QString());
+        cb_antialiasing->setText(QApplication::translate("DrawingTools", "\346\212\227\351\224\257\351\275\277", nullptr));
         groupBox->setTitle(QApplication::translate("DrawingTools", "shape", nullptr));
 #ifndef QT_NO_TOOLTIP
         pb_drawRect->setToolTip(QApplication::translate("DrawingTools", "Draw a Rect", nullptr));

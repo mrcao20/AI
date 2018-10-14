@@ -25,6 +25,7 @@ struct McCanvasData {
 	bool m_isLeftButtonPress;
 	QPoint m_shapeMoveStartPos;
 	int m_penStartIndex;	// 使用pen直接画图时图形的起始下标
+	bool m_isAntialiasing;	// 是否使用抗锯齿
 };
 
 McCanvas::McCanvas(QWidget *parent)
@@ -141,6 +142,10 @@ void McCanvas::redo() {
 	isShapeStackEmpty = false;
 	drawPixmap();
 	update();
+}
+
+void McCanvas::setAntialiasing(bool isAntialiasing) {
+	d->m_isAntialiasing = isAntialiasing;
 }
 
 void McCanvas::setStraight(bool isStraight) {
@@ -262,11 +267,11 @@ void McCanvas::mousePressEvent(QMouseEvent *event){
 		}else // 如果当前绘制的图形不是多边形，则标志位置false
 			d->m_isStopPolygon = true;
 		// 利用工厂得到图形
-		d->m_currShape = d->m_shapeFactory.getShape(d->m_shapeType, this);
+		d->m_currShape = d->m_shapeFactory.getShape(d->m_shapeType, d->m_isAntialiasing, this);
 		if (!d->m_currShape)	// 不存在此类型的图形，则直接返回
 			return;
 		if (d->m_shapeType == Mc::Pen){
-			McShapeInterface *zero = d->m_shapeFactory.getShape(d->m_shapeType, this);
+			McShapeInterface *zero = d->m_shapeFactory.getShape(d->m_shapeType, d->m_isAntialiasing, this);
 			zero->setPos(QPoint(-1, -1), QPoint(-1, -1), false);
 			d->m_shapeStack.push(zero);
 			d->m_penStartIndex = d->m_shapeStack.size() - 1;
@@ -317,7 +322,7 @@ void McCanvas::mouseMoveEvent(QMouseEvent *event){
 		d->m_currShape->setPos(d->m_currShape->startPos(), event->pos(), d->m_isStraight);
 		////////////Pen特殊处理/////////////////
 		if (d->m_shapeType == Mc::Pen) {
-			d->m_currShape = d->m_shapeFactory.getShape(d->m_shapeType, this);
+			d->m_currShape = d->m_shapeFactory.getShape(d->m_shapeType, d->m_isAntialiasing, this);
 			d->m_currShape->setShapeProperty(d->m_lineColor, d->m_brushColor, d->m_lineWidth);
 			d->m_currShape->setPos(event->pos(), event->pos(), false);
 			d->m_shapeStack.push(d->m_currShape);
@@ -332,7 +337,7 @@ void McCanvas::mouseReleaseEvent(QMouseEvent *event){
 		d->m_isDrawing = false;    //结束绘图
 		////////////Pen特殊处理/////////////////
 		if (d->m_shapeType == Mc::Pen) {
-			McShapeInterface *zero = d->m_shapeFactory.getShape(d->m_shapeType, this);
+			McShapeInterface *zero = d->m_shapeFactory.getShape(d->m_shapeType, d->m_isAntialiasing, this);
 			zero->setPos(QPoint(-1, -1), QPoint(-1, -1), false);
 			d->m_shapeStack.push(zero);
 		}//Pen 制造间隔点

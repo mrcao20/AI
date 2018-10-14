@@ -47,6 +47,8 @@ void McRect::paint(QPainter &paint){
 		return;
 	paint.setPen(QPen(m_lineColor, m_lineWidth));
 	paint.setBrush(m_brushColor);
+	if (m_isAntialiasing)	// 默认为不使用抗锯齿，如果需要指定再指定即可
+		paint.setRenderHint(QPainter::Antialiasing);
 	paint.drawRect(d->m_points.at(0).x(), d->m_points.at(0).y(), d->m_points.at(2).x() - d->m_points.at(0).x(), d->m_points.at(2).y() - d->m_points.at(0).y());
 }
 

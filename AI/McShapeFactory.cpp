@@ -6,8 +6,8 @@
 #include "McLine.h"
 #include "McPen.h"
 
-McShapeInterface *McShapeFactory::getShape(int shapeType, QObject *parent) {
-	McShapeInterface *shape = NULL;
+McShapeInterface *McShapeFactory::getShape(int shapeType, bool isAntialiasing, QObject *parent) {
+	McAbstractShape *shape = NULL;
 	if (shapeType == Mc::Rect) {
 		McRect *rect = new McRect(parent);
 		shape = rect;
@@ -28,5 +28,6 @@ McShapeInterface *McShapeFactory::getShape(int shapeType, QObject *parent) {
 		McPen *pen = new McPen(parent);
 		shape = pen;
 	}
+	shape->setAntialiasing(isAntialiasing);
 	return shape;
 }

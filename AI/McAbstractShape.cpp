@@ -5,6 +5,7 @@ McAbstractShape::McAbstractShape(QObject *parent)
 	, m_startPoint(QPoint(0, 0))
 	, m_endPoint(QPoint(0, 0))
 	, m_relationOffset(10)
+	, m_isAntialiasing(true)
 {
 
 }

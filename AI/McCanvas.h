@@ -27,6 +27,8 @@ public:
 	void undo();
 	void redo();
 
+	void setAntialiasing(bool isAntialiasing);
+
 	void setStraight(bool isStraight);
 	void setShapeType(int shapeType);
 	void setLineWidth(int lineWidth);
