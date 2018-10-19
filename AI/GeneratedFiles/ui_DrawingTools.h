@@ -42,6 +42,9 @@ public:
     QLabel *l_lineWidth;
     QDial *d_alpha;
     QLabel *l_alpha;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *label_3;
+    QPushButton *pb_bgColor;
     QVBoxLayout *verticalLayout;
     QLabel *label;
     QPushButton *pb_lineColor;
@@ -162,6 +165,24 @@ public:
         l_alpha->setObjectName(QStringLiteral("l_alpha"));
 
         horizontalLayout->addWidget(l_alpha);
+
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        label_3 = new QLabel(groupBox_2);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        verticalLayout_3->addWidget(label_3);
+
+        pb_bgColor = new QPushButton(groupBox_2);
+        pb_bgColor->setObjectName(QStringLiteral("pb_bgColor"));
+        pb_bgColor->setMinimumSize(QSize(0, 23));
+        pb_bgColor->setStyleSheet(QStringLiteral("border:1px solid white;"));
+        pb_bgColor->setFlat(true);
+
+        verticalLayout_3->addWidget(pb_bgColor);
+
+
+        horizontalLayout->addLayout(verticalLayout_3);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
@@ -371,6 +392,8 @@ public:
 #endif // QT_NO_SHORTCUT
         l_lineWidth->setText(QApplication::translate("DrawingTools", "\347\272\277\345\256\275:1", nullptr));
         l_alpha->setText(QApplication::translate("DrawingTools", "alpha\345\200\274:0", nullptr));
+        label_3->setText(QApplication::translate("DrawingTools", "\350\203\214\346\231\257\351\242\234\350\211\262", nullptr));
+        pb_bgColor->setText(QString());
         label->setText(QApplication::translate("DrawingTools", "\347\272\277\346\235\241\351\242\234\350\211\262", nullptr));
         pb_lineColor->setText(QString());
         label_2->setText(QApplication::translate("DrawingTools", "\345\241\253\345\205\205\351\242\234\350\211\262", nullptr));

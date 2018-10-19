@@ -21,6 +21,7 @@
 #include "StrToolsBox.h"
 #include "TcpServer.h"
 #include "GraphicalProcesses.h"
+#include "McGlobal.h"
 
 struct AIPrivateData : public Ui::AIClass {
 	QString m_appPath;
@@ -84,8 +85,8 @@ AI::AI(QWidget *parent)
 	show();
 	resetPosition();
 	
-	openInputEdit();
-	d->input->openGraphProcBox();
+	/*openInputEdit();
+	d->input->openGraphProcBox();*/
 }
 
 void AI::init() {

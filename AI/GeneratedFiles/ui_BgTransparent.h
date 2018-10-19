@@ -38,22 +38,9 @@ public:
     QHBoxLayout *horizontalLayout;
     QLabel *imageLabel;
     QGridLayout *gridLayout_2;
-    QSpacerItem *verticalSpacer_2;
-    QGroupBox *groupBox;
-    QGridLayout *gridLayout_4;
-    QFrame *f_bgColor;
-    QSpinBox *sb_variations;
-    QPushButton *pb_bgColor;
-    QLabel *label_4;
-    QLabel *label;
-    QSpinBox *sb_bgGray;
-    QSpacerItem *verticalSpacer_3;
     QPushButton *pb_previousImage;
     QPushButton *pb_autoProcess;
-    QPushButton *pb_transparent;
     QSpacerItem *verticalSpacer;
-    QPushButton *pb_nextImage;
-    QComboBox *transformCbB;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_3;
     QLabel *label_2;
@@ -61,12 +48,27 @@ public:
     QSpinBox *sb_edgeThreshold;
     QSpinBox *sb_blurThreshold;
     QSpacerItem *verticalSpacer_4;
+    QPushButton *pb_nextProc;
+    QPushButton *pb_procing;
+    QGroupBox *groupBox;
+    QGridLayout *gridLayout_4;
+    QFrame *f_bgColor;
+    QSpinBox *sb_colorD_value;
+    QPushButton *pb_bgColor;
+    QLabel *label_4;
+    QLabel *label;
+    QSpinBox *sb_bgGray;
+    QSpacerItem *verticalSpacer_3;
+    QPushButton *pb_nextImage;
+    QSpacerItem *verticalSpacer_2;
+    QComboBox *transformCbB;
 
     void setupUi(QWidget *BgTransparent)
     {
         if (BgTransparent->objectName().isEmpty())
             BgTransparent->setObjectName(QStringLiteral("BgTransparent"));
         BgTransparent->resize(731, 450);
+        BgTransparent->setFocusPolicy(Qt::StrongFocus);
         gridLayout = new QGridLayout(BgTransparent);
         gridLayout->setSpacing(0);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
@@ -99,6 +101,7 @@ public:
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         imageLabel = new QLabel(frame);
         imageLabel->setObjectName(QStringLiteral("imageLabel"));
+        imageLabel->setFocusPolicy(Qt::StrongFocus);
         imageLabel->setStyleSheet(QStringLiteral("background-color:rgb(0, 0, 0)"));
         imageLabel->setAlignment(Qt::AlignCenter);
 
@@ -109,15 +112,75 @@ public:
 
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        verticalSpacer_2 = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Preferred);
+        pb_previousImage = new QPushButton(BgTransparent);
+        pb_previousImage->setObjectName(QStringLiteral("pb_previousImage"));
+        pb_previousImage->setMaximumSize(QSize(60, 16777215));
 
-        gridLayout_2->addItem(verticalSpacer_2, 4, 0, 1, 2);
+        gridLayout_2->addWidget(pb_previousImage, 11, 0, 1, 1);
 
-        groupBox = new QGroupBox(BgTransparent);
-        groupBox->setObjectName(QStringLiteral("groupBox"));
+        pb_autoProcess = new QPushButton(BgTransparent);
+        pb_autoProcess->setObjectName(QStringLiteral("pb_autoProcess"));
+
+        gridLayout_2->addWidget(pb_autoProcess, 10, 0, 1, 2);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_2->addItem(verticalSpacer, 9, 0, 1, 2);
+
+        groupBox_2 = new QGroupBox(BgTransparent);
+        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         QFont font;
         font.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
         font.setPointSize(8);
+        groupBox_2->setFont(font);
+        groupBox_2->setStyleSheet(QStringLiteral("QGroupBox#groupBox_2{background-color:rgb(157, 157, 157)}"));
+        gridLayout_3 = new QGridLayout(groupBox_2);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        label_2 = new QLabel(groupBox_2);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        gridLayout_3->addWidget(label_2, 2, 0, 1, 1);
+
+        label_3 = new QLabel(groupBox_2);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        gridLayout_3->addWidget(label_3, 3, 0, 1, 1);
+
+        sb_edgeThreshold = new QSpinBox(groupBox_2);
+        sb_edgeThreshold->setObjectName(QStringLiteral("sb_edgeThreshold"));
+        sb_edgeThreshold->setMaximum(255);
+        sb_edgeThreshold->setValue(200);
+
+        gridLayout_3->addWidget(sb_edgeThreshold, 2, 1, 1, 1);
+
+        sb_blurThreshold = new QSpinBox(groupBox_2);
+        sb_blurThreshold->setObjectName(QStringLiteral("sb_blurThreshold"));
+        sb_blurThreshold->setMaximum(255);
+        sb_blurThreshold->setValue(150);
+
+        gridLayout_3->addWidget(sb_blurThreshold, 3, 1, 1, 1);
+
+        verticalSpacer_4 = new QSpacerItem(20, 10, QSizePolicy::Minimum, QSizePolicy::Preferred);
+
+        gridLayout_3->addItem(verticalSpacer_4, 0, 0, 1, 2);
+
+
+        gridLayout_2->addWidget(groupBox_2, 5, 0, 1, 2);
+
+        pb_nextProc = new QPushButton(BgTransparent);
+        pb_nextProc->setObjectName(QStringLiteral("pb_nextProc"));
+        pb_nextProc->setMaximumSize(QSize(60, 16777215));
+
+        gridLayout_2->addWidget(pb_nextProc, 12, 1, 1, 1);
+
+        pb_procing = new QPushButton(BgTransparent);
+        pb_procing->setObjectName(QStringLiteral("pb_procing"));
+        pb_procing->setMaximumSize(QSize(60, 16777215));
+
+        gridLayout_2->addWidget(pb_procing, 12, 0, 1, 1);
+
+        groupBox = new QGroupBox(BgTransparent);
+        groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setFont(font);
         groupBox->setStyleSheet(QStringLiteral("QGroupBox#groupBox{background-color:rgb(157, 157, 157)}"));
         gridLayout_4 = new QGridLayout(groupBox);
@@ -189,11 +252,11 @@ public:
 
         gridLayout_4->addWidget(f_bgColor, 1, 1, 1, 1);
 
-        sb_variations = new QSpinBox(groupBox);
-        sb_variations->setObjectName(QStringLiteral("sb_variations"));
-        sb_variations->setMaximum(255);
+        sb_colorD_value = new QSpinBox(groupBox);
+        sb_colorD_value->setObjectName(QStringLiteral("sb_colorD_value"));
+        sb_colorD_value->setMaximum(255);
 
-        gridLayout_4->addWidget(sb_variations, 2, 1, 1, 1);
+        gridLayout_4->addWidget(sb_colorD_value, 2, 1, 1, 1);
 
         pb_bgColor = new QPushButton(groupBox);
         pb_bgColor->setObjectName(QStringLiteral("pb_bgColor"));
@@ -225,31 +288,15 @@ public:
 
         gridLayout_2->addWidget(groupBox, 3, 0, 1, 2);
 
-        pb_previousImage = new QPushButton(BgTransparent);
-        pb_previousImage->setObjectName(QStringLiteral("pb_previousImage"));
-        pb_previousImage->setMaximumSize(QSize(60, 16777215));
-
-        gridLayout_2->addWidget(pb_previousImage, 10, 0, 1, 1);
-
-        pb_autoProcess = new QPushButton(BgTransparent);
-        pb_autoProcess->setObjectName(QStringLiteral("pb_autoProcess"));
-
-        gridLayout_2->addWidget(pb_autoProcess, 9, 0, 1, 2);
-
-        pb_transparent = new QPushButton(BgTransparent);
-        pb_transparent->setObjectName(QStringLiteral("pb_transparent"));
-
-        gridLayout_2->addWidget(pb_transparent, 11, 0, 1, 2);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_2->addItem(verticalSpacer, 8, 0, 1, 2);
-
         pb_nextImage = new QPushButton(BgTransparent);
         pb_nextImage->setObjectName(QStringLiteral("pb_nextImage"));
         pb_nextImage->setMaximumSize(QSize(60, 16777215));
 
-        gridLayout_2->addWidget(pb_nextImage, 10, 1, 1, 1);
+        gridLayout_2->addWidget(pb_nextImage, 11, 1, 1, 1);
+
+        verticalSpacer_2 = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Preferred);
+
+        gridLayout_2->addItem(verticalSpacer_2, 4, 0, 1, 2);
 
         transformCbB = new QComboBox(BgTransparent);
         transformCbB->addItem(QString());
@@ -258,43 +305,6 @@ public:
         transformCbB->setMinimumSize(QSize(75, 0));
 
         gridLayout_2->addWidget(transformCbB, 1, 0, 1, 2);
-
-        groupBox_2 = new QGroupBox(BgTransparent);
-        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        groupBox_2->setFont(font);
-        groupBox_2->setStyleSheet(QStringLiteral("QGroupBox#groupBox_2{background-color:rgb(157, 157, 157)}"));
-        gridLayout_3 = new QGridLayout(groupBox_2);
-        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
-        label_2 = new QLabel(groupBox_2);
-        label_2->setObjectName(QStringLiteral("label_2"));
-
-        gridLayout_3->addWidget(label_2, 2, 0, 1, 1);
-
-        label_3 = new QLabel(groupBox_2);
-        label_3->setObjectName(QStringLiteral("label_3"));
-
-        gridLayout_3->addWidget(label_3, 3, 0, 1, 1);
-
-        sb_edgeThreshold = new QSpinBox(groupBox_2);
-        sb_edgeThreshold->setObjectName(QStringLiteral("sb_edgeThreshold"));
-        sb_edgeThreshold->setMaximum(255);
-        sb_edgeThreshold->setValue(200);
-
-        gridLayout_3->addWidget(sb_edgeThreshold, 2, 1, 1, 1);
-
-        sb_blurThreshold = new QSpinBox(groupBox_2);
-        sb_blurThreshold->setObjectName(QStringLiteral("sb_blurThreshold"));
-        sb_blurThreshold->setMaximum(255);
-        sb_blurThreshold->setValue(150);
-
-        gridLayout_3->addWidget(sb_blurThreshold, 3, 1, 1, 1);
-
-        verticalSpacer_4 = new QSpacerItem(20, 10, QSizePolicy::Minimum, QSizePolicy::Preferred);
-
-        gridLayout_3->addItem(verticalSpacer_4, 0, 0, 1, 2);
-
-
-        gridLayout_2->addWidget(groupBox_2, 5, 0, 1, 2);
 
 
         gridLayout->addLayout(gridLayout_2, 0, 3, 3, 1);
@@ -310,20 +320,21 @@ public:
         BgTransparent->setWindowTitle(QApplication::translate("BgTransparent", "BgTransparent", nullptr));
         l_imageState->setText(QApplication::translate("BgTransparent", "\345\233\276\347\211\207\344\270\272\347\251\272", nullptr));
         imageLabel->setText(QString());
-        groupBox->setTitle(QApplication::translate("BgTransparent", "\345\210\233\345\273\272alpha\351\200\232\351\201\223", nullptr));
-        pb_bgColor->setText(QApplication::translate("BgTransparent", "\350\203\214\346\231\257\351\242\234\350\211\262", nullptr));
-        label_4->setText(QApplication::translate("BgTransparent", "\345\217\230\345\212\250\345\271\205\345\272\246", nullptr));
-        label->setText(QApplication::translate("BgTransparent", "\350\203\214\346\231\257\347\201\260\345\272\246\345\200\274", nullptr));
         pb_previousImage->setText(QApplication::translate("BgTransparent", "\344\270\212\344\270\200\345\274\240", nullptr));
         pb_autoProcess->setText(QApplication::translate("BgTransparent", "\350\207\252\345\212\250\345\244\204\347\220\206", nullptr));
-        pb_transparent->setText(QApplication::translate("BgTransparent", "\345\274\200\345\247\213", nullptr));
+        groupBox_2->setTitle(QApplication::translate("BgTransparent", "\350\276\271\347\274\230\345\271\263\346\273\221", nullptr));
+        label_2->setText(QApplication::translate("BgTransparent", "\350\276\271\347\274\230\351\230\210\345\200\274", nullptr));
+        label_3->setText(QApplication::translate("BgTransparent", "\346\250\241\347\263\212\351\230\210\345\200\274", nullptr));
+        pb_nextProc->setText(QApplication::translate("BgTransparent", "\344\270\213\344\270\200\346\255\245", nullptr));
+        pb_procing->setText(QApplication::translate("BgTransparent", "\345\244\204\347\220\206", nullptr));
+        groupBox->setTitle(QApplication::translate("BgTransparent", "\345\210\233\345\273\272alpha\351\200\232\351\201\223", nullptr));
+        pb_bgColor->setText(QApplication::translate("BgTransparent", "\350\203\214\346\231\257\351\242\234\350\211\262", nullptr));
+        label_4->setText(QApplication::translate("BgTransparent", "\350\211\262\345\267\256", nullptr));
+        label->setText(QApplication::translate("BgTransparent", "\347\201\260\345\272\246\345\200\274", nullptr));
         pb_nextImage->setText(QApplication::translate("BgTransparent", "\344\270\213\344\270\200\345\274\240", nullptr));
         transformCbB->setItemText(0, QApplication::translate("BgTransparent", "\345\277\253\351\200\237\345\217\230\346\215\242", nullptr));
         transformCbB->setItemText(1, QApplication::translate("BgTransparent", "\345\271\263\346\273\221\345\217\230\346\215\242", nullptr));
 
-        groupBox_2->setTitle(QApplication::translate("BgTransparent", "\350\276\271\347\274\230\345\271\263\346\273\221", nullptr));
-        label_2->setText(QApplication::translate("BgTransparent", "\350\276\271\347\274\230\351\230\210\345\200\274", nullptr));
-        label_3->setText(QApplication::translate("BgTransparent", "\346\250\241\347\263\212\351\230\210\345\200\274", nullptr));
     } // retranslateUi
 
 };

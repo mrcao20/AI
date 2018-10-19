@@ -33,6 +33,7 @@ public:
 	void setShapeType(int shapeType);
 	void setLineWidth(int lineWidth);
 	void setAlpha(int alpha);
+	void setBgColor(const QColor &color);
 	void setLineColor(const QColor &color);
 	void setBrushColor(const QColor &color);
 
@@ -50,7 +51,7 @@ protected:
 
 private:
 	void shapeStackClear(QStack<McShapeInterface *> &stack);
-	void drawPixmap();
+	void drawPixmap(QPixmap &pix, const QColor &color, bool isDrawAll = false);
 	void paint(QPainter& painter);
 
 private:

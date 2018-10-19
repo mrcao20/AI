@@ -10,6 +10,9 @@
     <height>450</height>
    </rect>
   </property>
+  <property name="focusPolicy">
+   <enum>Qt::StrongFocus</enum>
+  </property>
   <property name="windowTitle">
    <string>BgTransparent</string>
   </property>
@@ -94,6 +97,9 @@
       </property>
       <item>
        <widget class="QLabel" name="imageLabel">
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color:rgb(0, 0, 0)</string>
         </property>
@@ -110,21 +116,132 @@
    </item>
    <item row="0" column="3" rowspan="3">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="4" column="0" colspan="2">
-      <spacer name="verticalSpacer_2">
+     <item row="11" column="0">
+      <widget class="QPushButton" name="pb_previousImage">
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>上一张</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0" colspan="2">
+      <widget class="QPushButton" name="pb_autoProcess">
+       <property name="text">
+        <string>自动处理</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0" colspan="2">
+      <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Preferred</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
-         <height>20</height>
+         <height>40</height>
         </size>
        </property>
       </spacer>
+     </item>
+     <item row="5" column="0" colspan="2">
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="font">
+        <font>
+         <family>微软雅黑</family>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QGroupBox#groupBox_2{background-color:rgb(157, 157, 157)}</string>
+       </property>
+       <property name="title">
+        <string>边缘平滑</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>边缘阈值</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>模糊阈值</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QSpinBox" name="sb_edgeThreshold">
+          <property name="maximum">
+           <number>255</number>
+          </property>
+          <property name="value">
+           <number>200</number>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QSpinBox" name="sb_blurThreshold">
+          <property name="maximum">
+           <number>255</number>
+          </property>
+          <property name="value">
+           <number>150</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <spacer name="verticalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Preferred</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>10</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="12" column="1">
+      <widget class="QPushButton" name="pb_nextProc">
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>下一步</string>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="0">
+      <widget class="QPushButton" name="pb_procing">
+       <property name="maximumSize">
+        <size>
+         <width>60</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>处理</string>
+       </property>
+      </widget>
      </item>
      <item row="3" column="0" colspan="2">
       <widget class="QGroupBox" name="groupBox">
@@ -585,7 +702,7 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QSpinBox" name="sb_variations">
+         <widget class="QSpinBox" name="sb_colorD_value">
           <property name="maximum">
            <number>255</number>
           </property>
@@ -607,14 +724,14 @@
         <item row="2" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>变动幅度</string>
+           <string>色差</string>
           </property>
          </widget>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>背景灰度值</string>
+           <string>灰度值</string>
           </property>
          </widget>
         </item>
@@ -647,47 +764,7 @@
        </layout>
       </widget>
      </item>
-     <item row="10" column="0">
-      <widget class="QPushButton" name="pb_previousImage">
-       <property name="maximumSize">
-        <size>
-         <width>60</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>上一张</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="0" colspan="2">
-      <widget class="QPushButton" name="pb_autoProcess">
-       <property name="text">
-        <string>自动处理</string>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="0" colspan="2">
-      <widget class="QPushButton" name="pb_transparent">
-       <property name="text">
-        <string>开始</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0" colspan="2">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="10" column="1">
+     <item row="11" column="1">
       <widget class="QPushButton" name="pb_nextImage">
        <property name="maximumSize">
         <size>
@@ -699,6 +776,22 @@
         <string>下一张</string>
        </property>
       </widget>
+     </item>
+     <item row="4" column="0" colspan="2">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item row="1" column="0" colspan="2">
       <widget class="QComboBox" name="transformCbB">
@@ -720,78 +813,12 @@
        </item>
       </widget>
      </item>
-     <item row="5" column="0" colspan="2">
-      <widget class="QGroupBox" name="groupBox_2">
-       <property name="font">
-        <font>
-         <family>微软雅黑</family>
-         <pointsize>8</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QGroupBox#groupBox_2{background-color:rgb(157, 157, 157)}</string>
-       </property>
-       <property name="title">
-        <string>边缘平滑</string>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>边缘阈值</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>模糊阈值</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QSpinBox" name="sb_edgeThreshold">
-          <property name="maximum">
-           <number>255</number>
-          </property>
-          <property name="value">
-           <number>200</number>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QSpinBox" name="sb_blurThreshold">
-          <property name="maximum">
-           <number>255</number>
-          </property>
-          <property name="value">
-           <number>150</number>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" colspan="2">
-         <spacer name="verticalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Preferred</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>10</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="AI.qrc"/>
+ </resources>
  <connections/>
 </ui>

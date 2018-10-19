@@ -1,9 +1,10 @@
 #include "OutputTransform.h"
-#include "Output.h"
 #include <qtimer.h>
 #include <QtTextToSpeech\qtexttospeech.h>
 #include "OutputBox.h"
 #include "OutputBigBox.h"
+#include "McOutput.h"
+#include "Output.h"
 
 struct OutputTransformDataPrivate{
 	QScopedPointer<QTextToSpeech> m_textSpeech;
@@ -43,6 +44,7 @@ OutputTransform::OutputTransform(QObject *parent)
 		d->m_outputTextList.removeFirst();
 		if (d->m_outputTextList.empty()) d->m_timer->stop();
 	});
+	connect(McOutputInstance, SIGNAL(message(QString)), this, SLOT(handleOutputText(QString)));
 	connect(Output::instance(), SIGNAL(message(QString)), this, SLOT(handleOutputText(QString)));
 }
 

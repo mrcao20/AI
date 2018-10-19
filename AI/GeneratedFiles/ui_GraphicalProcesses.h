@@ -19,7 +19,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QWidget>
-#include "bgtransparent.h"
+#include "mcbgtransparent.h"
 #include "mcdrawingtools.h"
 
 QT_BEGIN_NAMESPACE
@@ -29,7 +29,7 @@ class Ui_GraphicalProcessesClass
 public:
     QGridLayout *gridLayout;
     QTabWidget *tabWidget;
-    BgTransparent *bgTransparent;
+    McBgTransparent *bgTransparent;
     QWidget *snippingTool;
     McDrawingTools *drawingTool;
     QSpacerItem *horizontalSpacer;
@@ -47,19 +47,23 @@ public:
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         tabWidget = new QTabWidget(GraphicalProcessesClass);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tabWidget->setFocusPolicy(Qt::StrongFocus);
         tabWidget->setStyleSheet(QLatin1String("QTabBar::tab{\n"
 "	width:80;\n"
 "	height:25;\n"
 "};"));
-        bgTransparent = new BgTransparent();
+        bgTransparent = new McBgTransparent();
         bgTransparent->setObjectName(QStringLiteral("bgTransparent"));
+        bgTransparent->setFocusPolicy(Qt::StrongFocus);
         bgTransparent->setStyleSheet(QStringLiteral("QWidget#bgTransparent{background-color:rgb(206, 206, 206)}"));
         tabWidget->addTab(bgTransparent, QString());
         snippingTool = new QWidget();
         snippingTool->setObjectName(QStringLiteral("snippingTool"));
+        snippingTool->setFocusPolicy(Qt::StrongFocus);
         tabWidget->addTab(snippingTool, QString());
         drawingTool = new McDrawingTools();
         drawingTool->setObjectName(QStringLiteral("drawingTool"));
+        drawingTool->setFocusPolicy(Qt::StrongFocus);
         tabWidget->addTab(drawingTool, QString());
 
         gridLayout->addWidget(tabWidget, 1, 0, 1, 3);

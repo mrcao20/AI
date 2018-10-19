@@ -7,8 +7,7 @@
 #include <qcolor.h>
 #include <opencv2/opencv.hpp>
 #include "ui_BgTransparent.h"
-#include "Global.h"
-#include "Output.h"
+#include "McGlobal.h"
 
 struct BgTransparentData : public Ui::BgTransparent {
 	Qt::TransformationMode m_transformMode;
@@ -41,7 +40,7 @@ BgTransparent::BgTransparent(QWidget *parent)
 
 	connect(d->transformCbB, &QComboBox::currentTextChanged, [this](const QString &text) {
 		if (!d->m_canManualProcess) {
-			output << "暂时不允许手动改动";
+			mcOutput << "暂时不允许手动改动";
 			return;
 		}
 		if (text == "快速变换") {
@@ -57,7 +56,7 @@ BgTransparent::BgTransparent(QWidget *parent)
 	});
 	connect(d->pb_previousImage, &QPushButton::clicked, [this]() {
 		if (!d->m_canManualProcess) {
-			output << "暂时不允许手动改动";
+			mcOutput << "暂时不允许手动改动";
 			return;
 		}
 		m_currentIndex = m_currentIndex == 0 ? m_images.size() - 1 : m_currentIndex - 1;
@@ -66,21 +65,21 @@ BgTransparent::BgTransparent(QWidget *parent)
 	});
 	connect(d->pb_nextImage, &QPushButton::clicked, [this]() {
 		if (!d->m_canManualProcess) {
-			output << "暂时不允许手动改动";
+			mcOutput << "暂时不允许手动改动";
 			return;
 		}
 		showNext();
 	});
 	connect(d->pb_transparent, &QPushButton::clicked, [this]() {
 		if (!d->m_canManualProcess) {
-			output << "暂时不允许手动改动";
+			mcOutput << "暂时不允许手动改动";
 			return;
 		}
 		imageTransparent();
 	});
 	connect(d->pb_bgColor, &QPushButton::clicked, [this]() {
 		if (!d->m_canManualProcess) {
-			output << "暂时不允许手动改动";
+			mcOutput << "暂时不允许手动改动";
 			return;
 		}
 		QColor c = QColorDialog::getColor();
@@ -95,7 +94,7 @@ BgTransparent::BgTransparent(QWidget *parent)
 	});
 	connect(d->sb_variations, qOverload<int>(&QSpinBox::valueChanged), [this](int i) {
 		if (!d->m_canManualProcess) {
-			output << "暂时不允许手动改动";
+			mcOutput << "暂时不允许手动改动";
 			return;
 		}
 		d->m_variations = i;
@@ -106,7 +105,7 @@ BgTransparent::BgTransparent(QWidget *parent)
 	});
 	connect(d->sb_bgGray, qOverload<int>(&QSpinBox::valueChanged), [this](int i) {
 		if (!d->m_canManualProcess) {
-			output << "暂时不允许手动改动";
+			mcOutput << "暂时不允许手动改动";
 			return;
 		}
 		d->m_alphaThreshold = i;
@@ -121,7 +120,7 @@ BgTransparent::BgTransparent(QWidget *parent)
 	});
 	connect(d->sb_edgeThreshold, qOverload<int>(&QSpinBox::valueChanged), [this](int i) {
 		if (!d->m_canManualProcess) {
-			output << "暂时不允许手动改动";
+			mcOutput << "暂时不允许手动改动";
 			return;
 		}
 		d->m_edgeThreshold = i;
@@ -132,7 +131,7 @@ BgTransparent::BgTransparent(QWidget *parent)
 	});
 	connect(d->sb_blurThreshold, qOverload<int>(&QSpinBox::valueChanged), [this](int i) {
 		if (!d->m_canManualProcess) {
-			output << "暂时不允许手动改动";
+			mcOutput << "暂时不允许手动改动";
 			return;
 		}
 		d->m_blurThreshold = i;
@@ -143,7 +142,7 @@ BgTransparent::BgTransparent(QWidget *parent)
 	});
 	connect(d->pb_autoProcess, &QPushButton::clicked, [this]() {
 		if (!d->m_canManualProcess) {
-			output << "暂时不允许手动改动";
+			mcOutput << "暂时不允许手动改动";
 			return;
 		}
 		/*	这里采用开辟另一条线程来处理，主要原因如下：
@@ -157,7 +156,7 @@ BgTransparent::BgTransparent(QWidget *parent)
 
 void BgTransparent::reset() {
 	if (!d->m_canManualProcess) {
-		output << "暂时不允许重置操作";
+		mcOutput << "暂时不允许重置操作";
 		return;
 	}
 	d->imageLabel->clear();
@@ -166,7 +165,7 @@ void BgTransparent::reset() {
 
 bool BgTransparent::hasInputImage(const QList<QImage> &images) {
 	if (!d->m_canManualProcess) {
-		output << "图片正在处理，暂时不允许载入";
+		mcOutput << "图片正在处理，暂时不允许载入";
 		return false;
 	}
 	if (images.isEmpty()) {
@@ -184,7 +183,7 @@ bool BgTransparent::hasInputImage(const QList<QImage> &images) {
 
 bool BgTransparent::beingSaved() {
 	if (!d->m_canManualProcess) {
-		output << "图片正在处理，暂时不允许保存";
+		mcOutput << "图片正在处理，暂时不允许保存";
 		return false;
 	}
 	updateState("正在保存...");
@@ -238,7 +237,8 @@ bool BgTransparent::eventFilter(QObject *watched, QEvent *event) {
 				int green = qGreen(rgb);
 				int blue = qBlue(rgb);
 				int gray = qGray(rgb);
-				output << QString("red:%1 green:%2 blue:%3 gray:%4").arg(QString::number(red), 
+				mcOutput << QString("red:%1 green:%2 blue:%3 gray:%4").arg(
+												QString::number(red), 
 												QString::number(green), 
 												QString::number(blue), 
 												QString::number(gray));
@@ -332,7 +332,7 @@ QImage BgTransparent::createAlpha(QImage& img, int threshold, int variations) {
 	l = (l < 0) ? 0 : l;	// 不得低于零
 	h = threshold + m;		// 阈值上限
 	h = (h > 255) ? 255 : h;	// 不得高于255
-	cv::Mat src = QImage2cvMat(img);
+	cv::Mat src = Mc::QImage2cvMat(img);
 	cv::Mat alpha = cv::Mat::zeros(src.rows, src.cols, CV_8UC1);
 	cv::Mat gray = cv::Mat::zeros(src.rows, src.cols, CV_8UC1);
 	cv::cvtColor(src, gray, cv::COLOR_RGB2GRAY);	// 从QImage转换而来的图像为R G B排列顺序
@@ -343,15 +343,15 @@ QImage BgTransparent::createAlpha(QImage& img, int threshold, int variations) {
 			alpha.at<uchar>(i, j) = (temp >= l && temp <= h) ? 0 : 255;
 		}
 	}
-	return cvMat2QImage(alpha);		// 这里为8位单通道图，故无需转换
+	return Mc::cvMat2QImage(alpha);		// 这里为8位单通道图，故无需转换
 }
 
 /*	edgeThreshold：边缘阈值，alpha通道值位于该值以上的点将被透明化，初始值为200
 	blurThreshold：模糊阈值，高斯模糊后处于该值以上的点将会被置为255，即不模糊，其他点不做操作，即模糊，初始值为150
 */
 QImage BgTransparent::edgeSmooth(QImage &img, QImage &alpha, int edgeThreshold, int blurThreshold) {
-	cv::Mat src = QImage2cvMat(img);
-	cv::Mat cvAlpha = QImage2cvMat(alpha);
+	cv::Mat src = Mc::QImage2cvMat(img);
+	cv::Mat cvAlpha = Mc::QImage2cvMat(alpha);
 	cv::Mat gray = cv::Mat::zeros(src.rows, src.cols, CV_8UC1);
 	cv::cvtColor(src, gray, cv::COLOR_RGB2GRAY);
 	cv::Mat newAlpha = cv::Mat::zeros(src.rows, src.cols, CV_8UC1);
@@ -385,13 +385,13 @@ QImage BgTransparent::edgeSmooth(QImage &img, QImage &alpha, int edgeThreshold, 
 				p[j] = 255;
 		}
 	}
-	return cvMat2QImage(newAlpha);
+	return Mc::cvMat2QImage(newAlpha);
 }
 
 QImage BgTransparent::addAlpha(QImage &img, QImage &alpha){
-	cv::Mat src = QImage2cvMat(img);
+	cv::Mat src = Mc::QImage2cvMat(img);
 	cv::Mat dst;
-	cv::Mat cvAlpha = QImage2cvMat(alpha);
+	cv::Mat cvAlpha = Mc::QImage2cvMat(alpha);
 	if (src.channels() == 1){
 		cv::cvtColor(src, src, cv::COLOR_GRAY2RGB);
 	}
@@ -409,7 +409,7 @@ QImage BgTransparent::addAlpha(QImage &img, QImage &alpha){
 	dstChannels.push_back(cvAlpha);
 	//合并通道
 	cv::merge(dstChannels, dst);
-	return cvMat2QImage(dst);
+	return Mc::cvMat2QImage(dst);
 }
 
 void BgTransparent::showNext() {

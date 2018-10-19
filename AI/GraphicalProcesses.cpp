@@ -21,15 +21,18 @@ GraphicalProcesses::GraphicalProcesses(QWidget *parent)
 }
 
 void GraphicalProcesses::init() {
-	d->drawingTool->init();
+	d->tabWidget->setCurrentWidget(d->bgTransparent);
+	d->bgTransparent->init();
 	d->m_widgets.append(d->bgTransparent);
+	d->tabWidget->setCurrentWidget(d->drawingTool);
+	d->drawingTool->init();
 	d->m_widgets.append(d->drawingTool);
 
 	connect(d->pb_reset, &QPushButton::clicked, [this]() {
 		int currIndex = d->tabWidget->currentIndex();
 		Widget *w = NULL;
 		if(currIndex < d->m_widgets.size() && currIndex >=0)
-			d->m_widgets.at(currIndex);
+			w = d->m_widgets.at(currIndex);
 		if(w)
 			w->reset();
 	});
@@ -73,6 +76,7 @@ void GraphicalProcesses::init() {
 	for (Widget *w : d->m_widgets) {
 		w->init(d->m_imageFormats);
 	}
+	d->tabWidget->setCurrentIndex(0);
 }
 
 void GraphicalProcesses::closeEvent(QCloseEvent *event) {

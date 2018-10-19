@@ -16,6 +16,7 @@ struct McCanvasData {
 	McShapeInterface *m_currShape;
 	bool m_isStraight;
 	int m_lineWidth;
+	QColor m_bgColor;
 	QColor m_lineColor;
 	QColor m_brushColor;
 	bool m_isStopPolygon;	// 绘制多边形是否结束
@@ -45,10 +46,10 @@ void McCanvas::init() {
 	d->m_currShape = NULL;
 	d->m_isStraight = false;
 	d->m_brushColor = Qt::transparent;
+	d->m_bgColor = Qt::transparent;
 	d->m_lineColor = Qt::black;
 	d->m_isStopPolygon = true;
-	d->m_pixmap = QPixmap(size());
-	d->m_pixmap.fill(Qt::transparent);
+	drawPixmap(d->m_pixmap, d->m_bgColor);
 	update();
 }
 
@@ -96,7 +97,7 @@ void McCanvas::undo() {
 		d->m_currShape = d->m_shapeStack.isEmpty() ? NULL : d->m_shapeStack.top();	// 获取新的最上面的图形
 	}
 	// 清空画板，并重新绘制所有图形
-	drawPixmap();
+	drawPixmap(d->m_pixmap, d->m_bgColor);
 	update();
 }
 
@@ -140,7 +141,7 @@ void McCanvas::redo() {
 		}
 	}
 	isShapeStackEmpty = false;
-	drawPixmap();
+	drawPixmap(d->m_pixmap, d->m_bgColor);
 	update();
 }
 
@@ -178,6 +179,12 @@ void McCanvas::setLineWidth(int lineWidth) {
 
 void McCanvas::setAlpha(int alpha) {
 	d->m_brushColor.setAlpha(alpha);
+}
+
+void McCanvas::setBgColor(const QColor &color) {
+	d->m_bgColor = color;
+	drawPixmap(d->m_pixmap, d->m_bgColor);
+	update();
 }
 
 void McCanvas::setLineColor(const QColor &color) {
@@ -226,8 +233,9 @@ void McCanvas::paintEvent(QPaintEvent *event){
 				shape->getBorder(top, bottom, left, right, size());
 			int w = right - left;
 			int h = bottom - top;
-			QPixmap pix = d->m_pixmap.copy(left, top, w, h);
-			hasImage(pix.toImage());
+			QPixmap pix;
+			drawPixmap(pix, Qt::transparent, true);
+			hasImage(pix.copy(left, top, w, h).toImage());
 		}
 	}
 	else {
@@ -314,7 +322,7 @@ void McCanvas::mouseMoveEvent(QMouseEvent *event){
 		if (d->m_currShape) {
 			d->m_currShape->move(event->pos() - d->m_shapeMoveStartPos);
 			d->m_shapeMoveStartPos = event->pos();
-			drawPixmap();
+			drawPixmap(d->m_pixmap, d->m_bgColor);
 			update();
 		}
 	}
@@ -352,7 +360,7 @@ void McCanvas::mouseReleaseEvent(QMouseEvent *event){
 void McCanvas::resizeEvent(QResizeEvent * event) {
 	if (height() > d->m_pixmap.height() || width() > d->m_pixmap.width()) {
 		QPixmap newPix(size());
-		newPix.fill(Qt::transparent);
+		newPix.fill(d->m_bgColor);
 		QPainter p(&newPix);
 		p.drawPixmap(0, 0, d->m_pixmap);
 		d->m_pixmap = newPix;
@@ -395,11 +403,14 @@ void McCanvas::shapeStackClear(QStack<McShapeInterface *> &stack) {
 	stack.swap(QStack<McShapeInterface *>());
 }
 
-void McCanvas::drawPixmap() {
-	d->m_pixmap = QPixmap(size());
-	d->m_pixmap.fill(Qt::transparent);
-	QPainter pp(&d->m_pixmap);
-	for (int i = 0; i < d->m_shapeStack.size() - 1; i++) {	// 最后一个图形不在此处画，将使用paintEvent画
+void McCanvas::drawPixmap(QPixmap &pix, const QColor &color, bool isDrawAll) {
+	int offset = 1;
+	if (isDrawAll)
+		offset = 0;
+	pix = QPixmap(size());
+	pix.fill(color);
+	QPainter pp(&pix);
+	for (int i = 0; i < d->m_shapeStack.size() - offset; i++) {	// 最后一个图形不在此处画，将使用paintEvent画
 		// 如果该Pen是当前最后一个图形，则不画，当后面还存在任意一个图形时，则该Pen仍然会画
 		if (i == d->m_penStartIndex && d->m_shapeStack.at(d->m_shapeStack.size() - 1)->shapeType() == Mc::Pen)
 			break;

@@ -57,6 +57,13 @@ McDrawingTools::McDrawingTools(QWidget *parent)
 			d->f_canvas->setShapeType(id);
 	});
 
+	connect(d->pb_bgColor, &QPushButton::clicked, [this]() {
+		QColor color = QColorDialog::getColor(Qt::white, this, "背景颜色");
+		if (!color.isValid())
+			return;
+		setWidgetPalette(d->pb_bgColor, QPalette::Button, color);
+		d->f_canvas->setBgColor(color);
+	});
 	connect(d->pb_lineColor, &QPushButton::clicked, [this]() {
 		QColor color = QColorDialog::getColor(Qt::white, this, "线条颜色");
 		if (!color.isValid())
@@ -86,9 +93,11 @@ void McDrawingTools::init() {
 	d->f_canvas->setLineWidth(1);
 	d->f_canvas->setAlpha(0);
 	d->f_canvas->setAntialiasing(d->cb_antialiasing->isChecked());
+	d->pb_bgColor->setAutoFillBackground(true);
 	d->pb_lineColor->setAutoFillBackground(true);
 	d->pb_brushColor->setAutoFillBackground(true);
 
+	setWidgetPalette(d->pb_bgColor, QPalette::Button, Qt::transparent);
 	setWidgetPalette(d->pb_lineColor, QPalette::Button, Qt::black);
 	setWidgetPalette(d->pb_brushColor, QPalette::Button, Qt::transparent);
 }

@@ -189,9 +189,6 @@
     <ClCompile Include="GraphicalProcesses.cpp">
       <Filter>Source Files\Graphical</Filter>
     </ClCompile>
-    <ClCompile Include="BgTransparent.cpp">
-      <Filter>Source Files\Graphical</Filter>
-    </ClCompile>
     <ClCompile Include="Widget.cpp">
       <Filter>Source Files\Graphical</Filter>
     </ClCompile>
@@ -221,6 +218,15 @@
     </ClCompile>
     <ClCompile Include="McPen.cpp">
       <Filter>Source Files\Graphical\DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="McGlobal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="McOutput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="McBgTransparent.cpp">
+      <Filter>Source Files\Graphical</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -284,9 +290,6 @@
     <QtMoc Include="TcpServer.h">
       <Filter>Header Files\Character</Filter>
     </QtMoc>
-    <QtMoc Include="BgTransparent.h">
-      <Filter>Header Files\Graphical</Filter>
-    </QtMoc>
     <QtMoc Include="GraphicalProcesses.h">
       <Filter>Header Files\Graphical</Filter>
     </QtMoc>
@@ -316,6 +319,12 @@
     </QtMoc>
     <QtMoc Include="McPen.h">
       <Filter>Header Files\Graphical\DrawingTools</Filter>
+    </QtMoc>
+    <QtMoc Include="McOutput.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="McBgTransparent.h">
+      <Filter>Header Files\Graphical</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

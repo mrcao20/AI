@@ -16,6 +16,9 @@
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0" colspan="3">
     <widget class="QTabWidget" name="tabWidget">
+     <property name="focusPolicy">
+      <enum>Qt::StrongFocus</enum>
+     </property>
      <property name="styleSheet">
       <string notr="true">QTabBar::tab{
 	width:80;
@@ -25,7 +28,10 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="BgTransparent" name="bgTransparent">
+     <widget class="McBgTransparent" name="bgTransparent">
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
       <property name="styleSheet">
        <string notr="true">QWidget#bgTransparent{background-color:rgb(206, 206, 206)}</string>
       </property>
@@ -34,11 +40,17 @@
       </attribute>
      </widget>
      <widget class="QWidget" name="snippingTool">
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
       <attribute name="title">
        <string>截图工具</string>
       </attribute>
      </widget>
      <widget class="McDrawingTools" name="drawingTool">
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
       <attribute name="title">
        <string>画图工具</string>
       </attribute>
@@ -83,15 +95,15 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>BgTransparent</class>
-   <extends>QWidget</extends>
-   <header>bgtransparent.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>McDrawingTools</class>
    <extends>QWidget</extends>
    <header>mcdrawingtools.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>McBgTransparent</class>
+   <extends>QWidget</extends>
+   <header>mcbgtransparent.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
