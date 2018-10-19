@@ -20,4 +20,4 @@ AI
 # 2018-10-19
 完善背景透明，暂时放弃加入图像修补工具，背景透明的缺陷修补内置于该功能之内<br/>
 完善McGlobal<br/>
-Output类重构完成，更名为McOutput，加入更多的输入格式，模仿qDebug的自动换行<br/>
+Output类重构完成，更名为McOutput，加入更多的输出格式，模仿qDebug的自动换行<br/>
