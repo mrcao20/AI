@@ -85,8 +85,8 @@ AI::AI(QWidget *parent)
 	show();
 	resetPosition();
 	
-	/*openInputEdit();
-	d->input->openGraphProcBox();*/
+	openInputEdit();
+	d->input->openGraphProcBox();
 }
 
 void AI::init() {
